@@ -401,6 +401,25 @@ main .calnav{margin:0 0 12px}
   .bigstart:not(.done){animation:glowBig 2.4s ease-in-out infinite}
 }
 @keyframes glowBig{0%,100%{box-shadow:0 22px 44px -18px rgba(201,68,26,.75),inset 0 -8px 0 rgba(0,0,0,.12),0 0 0 0 rgba(232,96,47,.35)}50%{box-shadow:0 22px 44px -18px rgba(201,68,26,.75),inset 0 -8px 0 rgba(0,0,0,.12),0 0 0 18px rgba(232,96,47,0)}}
+
+/* ================= v1.3 ================= */
+.hdate,.hclock{color:var(--brand)}
+.bigstart.done .ct{direction:rtl}
+.st{display:inline-flex;align-items:baseline;gap:3px;direction:rtl;unicode-bidi:isolate;font-variant-numeric:tabular-nums;white-space:nowrap}
+.st b{font-weight:inherit}
+.st .u{margin:0 1px}
+.st .x,.impv .x{font-style:normal;color:var(--ink-3);font-weight:500;margin:0 2px}
+.st .pl{font-style:normal;color:var(--ink-3);margin:0 5px}
+.impv{display:inline-flex;align-items:baseline;gap:4px;color:var(--ink-2);font-weight:600}
+.sumline .st,.xs .st,.pv small .st{color:var(--ink)}
+.sumline,.xs{display:flex;flex-wrap:wrap;align-items:baseline;row-gap:4px}
+.ex.vw .exh{background:linear-gradient(270deg,var(--brand),var(--brand-2));color:#fff;padding:14px 16px;margin-bottom:6px}
+.ex.vw .exh small{color:rgba(255,255,255,.82)}
+.ex.vw .exn{background:rgba(255,255,255,.22);color:#fff}
+.ex.vw .tag.pr{background:#FFF4C9;color:#8A6500}
+@media (prefers-color-scheme:dark){.ex.vw .exh{background:linear-gradient(270deg,#C9441A,#E8602F)}}
+.vb{box-shadow:none;width:22px;color:var(--ink-3);font-weight:600}
+.vrow:first-child{border-top:0}
 </style>
 </head>
 <body>
@@ -415,7 +434,7 @@ main .calnav{margin:0 0 12px}
 <script>
 "use strict";
 {
-const VERSION='1.2';
+const VERSION='1.3';
 
 /* =========================================================
    התוכנית — לשנות כאן תרגילים / סדר / יעדים.
@@ -530,13 +549,13 @@ function readyUp(id,d){
   const pw=Math.max(...p.a.slice(0,e.sets).map(s=>s.w));
   return!arrOf(d,id).some(s=>s&&has(s.w)&&s.w>pw);
 }
-const KG='<i class="u">ק״ג</i>';
-const setTxt=(b,e)=>e.bw?`${b.r} חזרות`:`${wT(e,b.w)}${KG}×${b.r}`;
+const seg=(w,r,e)=>`<b>${wT(e,w)}</b><i class="u">ק״ג</i><i class="x">×</i><b>${r??'–'}</b>`;
+const setTxt=(b,e)=>e.bw?`<span class="st"><b>${b.r}</b><i class="u">חזרות</i></span>`:`<span class="st">${seg(b.w,b.r,e)}</span>`;
 // "30×8+25×7" — כולל ירידות משקל; משקל כולל
 function setStr(s,e){
-  if(e.bw)return`<span class="ltr">${s.r??'–'}</span>`;
-  const parts=[`${wT(e,s.w)}${KG}×${s.r??'–'}`].concat((s.d||[]).filter(filledD).map(x=>`${wT(e,x.w)}${KG}×${x.r??'–'}`));
-  return`<span class="ltr">${parts.join('+')}</span>`;
+  if(e.bw)return`<span class="st"><b>${s.r??'–'}</b></span>`;
+  const parts=[s].concat((s.d||[]).filter(filledD)).map(g=>seg(g.w,g.r,e));
+  return`<span class="st">${parts.join('<i class="pl">+</i>')}</span>`;
 }
 function stats(d){
   const s=sess(d);let sets=0,vol=0;const imp=[],prs=[];
@@ -717,9 +736,9 @@ function viewCard(e,k,d){
   const a=arrOf(d,e.id),p=prevSess(e.id,d),n=doneCount(d,e),rows=[];
   for(let i=0;i<Math.max(e.sets,a.length);i++){
     const c=a[i];if(i>=e.sets&&!anyV(c))continue;const ok=isDone(c,e);
-    rows.push(`<div class="vrow"><span class="vb${ok?' ok':''}">${ok?I.check:i+1}</span><span class="vv">${anyV(c)?setStr(c,e)+(e.bw?' <small>חזרות</small>':e.bar!=null&&has(c.w)?`<small>${fmt(c.w)} לצד</small>`:''):'<span class="muted">—</span>'}</span><span class="dl">${deltaHtml(c,p&&p.a[i],e)}</span></div>`);
+    rows.push(`<div class="vrow"><span class="vb">${i+1}</span><span class="vv">${anyV(c)?setStr(c,e)+(e.bw?' <small>חזרות</small>':e.bar!=null&&has(c.w)?`<small>${fmt(c.w)} לצד</small>`:''):'<span class="muted">—</span>'}</span><span class="dl">${deltaHtml(c,p&&p.a[i],e)}</span></div>`);
   }
-  return`<section class="ex vw${n>=e.sets?' comp':''}" style="--i:${k}"><div class="exh"><span class="exn"><span class="num">${k+1}</span>${I.check}</span><span class="ext"><b>${esc(e.n)}</b>${e.sub?`<small>${esc(e.sub)}</small>`:''}</span><span class="exst">${isPR(e.id,d)?`<span class="tag pr">${I.trophy}שיא</span>`:''}</span></div><div class="vrows">${rows.join('')}</div></section>`;
+  return`<section class="ex vw" style="--i:${k}"><div class="exh"><span class="exn"><span class="num">${k+1}</span></span><span class="ext"><b>${esc(e.n)}</b>${e.sub?`<small>${esc(e.sub)}</small>`:''}</span><span class="exst">${isPR(e.id,d)?`<span class="tag pr">${I.trophy}שיא</span>`:''}</span></div><div class="vrows">${rows.join('')}</div></section>`;
 }
 function statusHtml(e,d,now){
   const n=doneCount(d,e);let h='';
@@ -879,7 +898,7 @@ function openFinish(){
     </div>`;
   if(prev){
     body+=`<h4 class="lbl">לעומת הפעם הקודמת · הסט הטוב ביותר</h4>`;
-    body+=st.imp.length?st.imp.map(x=>`<div class="imp">${I.up}<b>${esc(x.e.n)}</b><span class="ltr">${setTxt(x.from,x.e)} → ${setTxt(x.to,x.e)}</span>${st.prs.includes(x.e.id)?`<span class="tag pr">${I.trophy}שיא</span>`:''}</div>`).join('')
+    body+=st.imp.length?st.imp.map(x=>`<div class="imp">${I.up}<b>${esc(x.e.n)}</b><span class="impv">${setTxt(x.from,x.e)}<i class="x">←</i>${setTxt(x.to,x.e)}</span>${st.prs.includes(x.e.id)?`<span class="tag pr">${I.trophy}שיא</span>`:''}</div>`).join('')
       :'<p class="muted">אין שיפור בסט הטוב ביותר באף תרגיל הפעם.</p>';
   }
   openSheet({title:full?'כל הכבוד':'סיכום האימון',sub:`${wday(d)}, ${dm(d)}`,body,foot:`<div class="foot2"><button class="btn wa" data-act="share-w" data-val="${d}">${I.wa}שתף</button><button class="btn pri" data-act="close">סגירה</button></div>`,
@@ -912,7 +931,7 @@ function exProg(e,k){
   const diff=pts.length>1?+(val(last.b)-val(first.b)).toFixed(2):null;
   return`<button class="pcard" data-act="exhist" data-val="${e.id}" style="--i:${k}">
     <span class="pv"><b>${esc(e.n)}${e.retired?` <small style="display:inline">(${esc(e.sub)} · הוצא מהתוכנית)</small>`:''}</b>
-      <small>${last?`אחרון <span class="ltr">${setTxt(last.b,e)}</span> · שיא <span class="ltr">${setTxt(top,e)}</span>`:'עוד לא בוצע'}</small>
+      <small>${last?`אחרון ${setTxt(last.b,e)} · שיא ${setTxt(top,e)}`:'עוד לא בוצע'}</small>
       ${diff!=null?`<span class="pd ${diff>0?'up':diff<0?'dn':''}"><span class="ltr">${diff>0?'+':diff<0?'−':''}${fmt(Math.abs(diff))}</span> ${e.bw?'חזרות':'ק״ג'} מאז ${dm(first.d)}</span>`:''}
     </span>
     ${spark(pts.slice(-12).map(p=>val(p.b)))}
@@ -981,36 +1000,36 @@ async function buildShare(d){
       const rows=[];let row=[],rw=0;const avail=W-2*P-56;
       chips.forEach((t,i)=>{const cw=segW(t)+40+50;if(row.length&&rw+cw+12>avail){rows.push(row);row=[];rw=0}row.push({t,cw,i});rw+=cw+12});
       if(row.length)rows.push(row);
-      const h=28+50+16+rows.length*66+(rows.length-1)*12+28;
+      const h=92+22+rows.length*66+(rows.length-1)*12+26;
       if(draw){
-        x.fillStyle=C.card;rr(x,P,y,W-2*P,h,30);x.fill();x.strokeStyle=C.line;x.lineWidth=2;x.stroke();
-        // מספר + שם
-        const R=W-P-28;x.fillStyle=doneCount(d,e)>=e.sets?C.ok:C.chip;x.beginPath();x.arc(R-22,y+28+25,22,0,7);x.fill();
-        x.fillStyle=doneCount(d,e)>=e.sets?'#fff':C.ink2;font(700,24);x.textAlign='center';x.direction='ltr';x.fillText(String(k+1),R-22,y+28+34);
-        x.direction='rtl';x.textAlign='right';x.fillStyle=C.ink;font(700,38);x.fillText(e.n,R-60,y+28+38);
+        x.fillStyle=C.card;rr(x,P,y,W-2*P,h,30);x.fill();
+        // כותרת כתומה
+        x.save();rr(x,P,y,W-2*P,h,30);x.clip();const gg=x.createLinearGradient(P,0,W-P,0);gg.addColorStop(0,C.brand);gg.addColorStop(1,C.brand2);x.fillStyle=gg;x.fillRect(P,y,W-2*P,92);x.restore();
+        const R=W-P-28;x.fillStyle='rgba(255,255,255,.22)';x.beginPath();x.arc(R-22,y+46,22,0,7);x.fill();
+        x.fillStyle='#fff';font(700,24);x.textAlign='center';x.direction='ltr';x.fillText(String(k+1),R-22,y+55);
+        x.direction='rtl';x.textAlign='right';x.fillStyle='#fff';font(700,38);x.fillText(e.n,R-60,y+59);
         let nx=R-60-x.measureText(e.n).width-14;
-        if(e.sub){font(500,26);x.fillStyle=C.ink3;x.fillText(e.sub,nx,y+28+38);nx-=x.measureText(e.sub).width+14}
+        if(e.sub){font(500,26);x.fillStyle='rgba(255,255,255,.8)';x.fillText(e.sub,nx,y+59);nx-=x.measureText(e.sub).width+14}
         // תגים משמאל
         let L=P+28;
-        const tag=(txt,bg,fg)=>{font(700,25);const w=x.measureText(txt).width+32;x.fillStyle=bg;rr(x,L,y+28+6,w,40,20);x.fill();x.fillStyle=fg;x.textAlign='center';x.direction='rtl';x.fillText(txt,L+w/2,y+28+35);L+=w+10};
-        if(st.prs.includes(e.id))tag('שיא אישי',C.goldS,C.gold);
+        const tag=(txt,bg,fg)=>{font(700,25);const w=x.measureText(txt).width+32;x.fillStyle=bg;rr(x,L,y+26,w,40,20);x.fill();x.fillStyle=fg;x.textAlign='center';x.direction='rtl';x.fillText(txt,L+w/2,y+55);L+=w+10};
+        if(st.prs.includes(e.id))tag('שיא אישי','#FFF4C9',C.gold);
         const im=imp[e.id];
-        if(im){const v=e.bw?`+${im.to.r-im.from.r} חזרות`:(tw(e,im.to.w)>tw(e,im.from.w)?`+${fmt(tw(e,im.to.w)-tw(e,im.from.w))} ק״ג`:`+${tr(im.to)-tr(im.from)} חזרות`);tag('▲ '+v,C.okS,C.ok)}
+        if(im){const v=e.bw?`+${im.to.r-im.from.r} חזרות`:(tw(e,im.to.w)>tw(e,im.from.w)?`+${fmt(tw(e,im.to.w)-tw(e,im.from.w))} ק״ג`:`+${tr(im.to)-tr(im.from)} חזרות`);tag('▲ '+v,'#FFFFFF',C.ok)}
         // צ'יפים
-        let cy=y+28+50+16;
+        let cy=y+92+22;
         rows.forEach(r=>{let cx=W-P-28;r.forEach(({t,cw,i})=>{
           x.fillStyle=C.chip;rr(x,cx-cw,cy,cw,66,20);x.fill();
-          x.fillStyle=C.ink3;font(700,22);x.textAlign='center';x.direction='ltr';x.fillText(String(i+1),cx-26,cy+42);
-          x.fillStyle=C.line;x.fillRect(cx-50,cy+14,2,38);
-          let tx=cx-cw+20;x.direction='ltr';x.textAlign='left';
-          t.forEach(([v,k])=>{x.font=`${SF[k]} ${F}`;x.fillStyle=SC[k];x.fillText(v,tx,cy+45);tx+=x.measureText(v).width+GAP[k]});x.textAlign='center';
+          x.fillStyle=C.ink3;font(700,22);x.textAlign='center';x.direction='ltr';x.fillText(String(i+1),cx-24,cy+42);
+          x.fillStyle=C.line;x.fillRect(cx-48,cy+14,2,38);
+          let tx=cx-62;x.direction='ltr';x.textAlign='left';
+          t.forEach(([v,k])=>{x.font=`${SF[k]} ${F}`;x.fillStyle=SC[k];const w=x.measureText(v).width;x.fillText(v,tx-w,cy+45);tx-=w+GAP[k]});x.textAlign='center';
           cx-=cw+12});cy+=66+12});
       }
       y+=h+16;
     });
     y+=20;
-    if(draw){x.direction='rtl';x.textAlign='center';font(500,24);x.fillStyle=C.ink3;x.fillText('האימון שלי · המספרים הקטנים בתיבות הם מספרי הסטים · משקל כולל',W/2,y+10)}
-    return y+50;
+    return y+20;
   }
   c.width=W;c.height=2000;const H=pass(false);c.height=H;x.fillStyle=C.bg;x.fillRect(0,0,W,H);pass(true);
   return c;
