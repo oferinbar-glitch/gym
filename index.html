@@ -279,6 +279,98 @@ body.kb .toast{bottom:16px}
 @keyframes prPop{0%{transform:scale(.4) rotate(-10deg);opacity:0}55%{transform:scale(1.25) rotate(4deg);opacity:1}100%{transform:none}}
 @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(232,96,47,.5)}50%{box-shadow:0 0 0 10px rgba(232,96,47,0)}}
 @keyframes medal{0%{transform:scale(.3) rotate(-25deg);opacity:0}60%{transform:scale(1.15) rotate(6deg);opacity:1}100%{transform:none}}
+
+/* ================= v1.1 ================= */
+.ibtn{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);flex:none}
+.ibtn svg{width:20px;height:20px}
+.ibtn:active{background:var(--surface-2)}
+.subhead{display:flex;align-items:center;gap:12px}
+.subhead .wt b{font-size:22px}
+.subhead .btn.sm{height:38px;padding:0 14px;font-size:14px;border-radius:12px}
+.subhead .btn svg{width:16px;height:16px}
+.timer{display:inline-block;direction:ltr;unicode-bidi:isolate;font-family:var(--f-num);font-weight:700;font-size:28px!important;line-height:1.05;letter-spacing:-.5px;color:var(--brand);font-variant-numeric:tabular-nums}
+
+/* calendar */
+.calnav{display:flex;align-items:center;gap:8px}
+.calnav h1{flex:1;margin:0;text-align:center;font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.2}
+.calnav .btn.sm{height:34px}
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:14px 8px 10px}
+.calg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px 2px;justify-items:center}
+.calg .h{font-size:12.5px;color:var(--ink-3);font-weight:600;padding-bottom:4px}
+.cd{width:100%;max-width:48px;aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:15.5px;font-weight:500;color:var(--ink);position:relative;font-variant-numeric:tabular-nums}
+.cd.out{visibility:hidden}
+.cd.fut{color:var(--ink-3)}
+.cd.w{font-weight:700}
+.cd.w .dn{font-size:12.5px;line-height:1}
+.cd.today{box-shadow:0 0 0 2.5px var(--brand-2),0 0 0 7px var(--brand-soft);color:var(--brand);font-weight:700}
+.dbi{width:21px;height:21px;border-radius:6px;display:grid;place-items:center;background:linear-gradient(160deg,var(--brand-2),var(--brand));box-shadow:0 2px 5px -2px rgba(201,68,26,.6)}
+.dbi svg{width:15px;height:9px;fill:#F5F2EC}
+@media (prefers-color-scheme:dark){.dbi{background:linear-gradient(160deg,#E8602F,#C9441A)}}
+.calsum{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
+.calsum b{color:var(--ink);font-weight:700}
+.startbox{margin-top:16px}
+.start{height:62px!important;font-size:18px!important;border-radius:20px;gap:10px}
+.start svg{width:24px;height:24px}
+.start .ct{margin-right:auto;font-family:var(--f-num);font-weight:700;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.18);padding:4px 10px;border-radius:999px;font-size:15px}
+.start.live{justify-content:flex-start;padding:0 20px}
+.linkbtn{display:block;margin:12px auto 0;font-size:14px;font-weight:500;color:var(--ink-2);padding:6px 10px}
+.donebox{display:flex;align-items:center;gap:12px;background:var(--ok-soft);color:var(--ok);border-radius:18px;padding:12px 16px;margin-bottom:10px}
+.donebox>svg{width:22px;height:22px}
+.donebox span{flex:1;font-size:13.5px;line-height:1.35}
+.donebox b{display:block;font-size:15.5px}
+.lastw{text-align:center;font-size:13.5px;color:var(--ink-2);margin:14px 0 0}
+.lastw b{color:var(--ink);font-weight:600}
+@media (prefers-reduced-motion:no-preference){
+  main.enter .cal{animation:up .5s var(--ease) both}
+  main.enter .startbox{animation:up .5s var(--ease) .12s both}
+  main.enter .dbi{animation:pop .5s var(--ease) both;animation-delay:calc(200ms + var(--i,0) * 14ms)}
+  main.enter .cd.today{animation:todayIn .9s var(--ease) .25s both}
+  main.anim-next{animation:mNext .28s var(--ease)}
+  main.anim-prev{animation:mPrev .28s var(--ease)}
+}
+@keyframes todayIn{0%{box-shadow:0 0 0 0 var(--brand-2),0 0 0 0 var(--brand-soft)}60%{box-shadow:0 0 0 3px var(--brand-2),0 0 0 11px var(--brand-soft)}}
+@keyframes mNext{from{opacity:.3;transform:translateX(-40px)}}
+@keyframes mPrev{from{opacity:.3;transform:translateX(40px)}}
+
+/* set rows with drop-weights */
+.set{grid-template-columns:34px minmax(0,1fr) 10px minmax(0,1fr) 40px 28px;gap:7px}
+.set.bw{grid-template-columns:34px minmax(0,1fr) 40px 28px}
+.sb{width:34px;height:34px}
+.in{font-size:21px}
+.ab{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:var(--ink-3)}
+.ab svg{width:16px;height:16px}
+.ab:active{background:var(--surface-2);color:var(--ink)}
+.set.drop{padding-top:0}
+.set.drop .in{height:44px;font-size:18px;background:none;border:1.5px dashed var(--line)}
+.set.drop .in:focus{border-style:solid;border-color:var(--brand);background:var(--surface)}
+.set.drop .in.has{border-style:solid;border-color:var(--ok-soft);background:var(--ok-soft)}
+.dropi{display:grid;place-items:center;color:var(--ink-3)}
+.dropi svg{width:18px;height:18px;transform:scaleX(-1)}
+.wbox{position:relative;display:block}
+.wbox .in{padding-bottom:13px}
+.set.drop .wbox .in{padding-bottom:11px}
+.wbox .tot{position:absolute;left:0;right:0;bottom:5px;text-align:center;font-size:10.5px;font-weight:600;color:var(--ink-2);pointer-events:none;white-space:nowrap}
+.set.drop .wbox .tot{bottom:3px;font-size:10px}
+.wbox .tot.g{color:var(--ghost)}
+
+/* read-only view */
+.ex.vw{padding-bottom:6px}
+.ex.vw .exh{cursor:default}
+.vrows{padding:0 16px 8px}
+.vrow{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+.vb{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--ink-2);flex:none}
+.vb svg{width:14px;height:14px}
+.vb.ok{background:var(--ok);color:var(--on-ok);box-shadow:none}
+.vv{flex:1;min-width:0;font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+.vv small{font-size:12px;color:var(--ink-2);font-weight:500;margin-right:6px}
+.vv .dp{color:var(--ink-2);font-weight:600}
+.vrow .dl{width:44px;flex:none}
+.vtiles{margin:0 0 14px}
+.vtiles div{background:var(--surface);border:1px solid var(--line)}
+.mig{align-items:flex-start}
+.mig span{font-size:13.5px;font-weight:500}
+.mig .mrow{display:block;margin-top:4px;color:var(--ink)}
+.mig .acts{display:flex;gap:8px;margin-top:10px}
 </style>
 </head>
 <body>
@@ -292,25 +384,32 @@ body.kb .toast{bottom:16px}
 <script src="confetti.js" defer></script>
 <script>
 "use strict";
-const VERSION='1.0';
+{
+const VERSION='1.1';
 
 /* =========================================================
    התוכנית — לשנות כאן תרגילים / סדר / יעדים.
    id קבוע: אסור לשנות id של תרגיל קיים, אחרת ההיסטוריה שלו תתנתק.
-   rest בשניות. reps:null = מקסימום חזרות. bw:true = בלי משקל.
+   rest בשניות. reps:null = מקסימום. bw:true = בלי משקל.
+   bar = משקל המוט; ברשומה מזינים משקל לצד אחד, והסה״כ = מוט + 2 × צד.
    ========================================================= */
 const PROGRAM=[
-  {id:'bench',    n:'לחיצת חזה חופשי',                      sets:3, reps:8,    rest:90},
-  {id:'pulldown', n:'פולי עליון',       sub:'אחיזה ניטרלית', sets:3, reps:6,    rest:120},
-  {id:'legext',   n:'פשיטת רגליים',                         sets:3, reps:10,   rest:75},
-  {id:'legcurl',  n:'כפיפת רגליים',                         sets:3, reps:10,   rest:75},
-  {id:'latraise', n:'הרחקת כתפיים',                         sets:3, reps:15,   rest:50},
-  {id:'curl',     n:'דו־ראשי',          sub:'מוט אולימפי',   sets:3, reps:8,    rest:90},
-  {id:'skull',    n:'לחיצה צרפתית',                         sets:3, reps:8,    rest:90},
-  {id:'abs',      n:'בטן',              sub:'בוסו',          sets:3, reps:null, rest:null, bw:true},
+  {id:'bench',    n:'לחיצת חזה חופשי',                      sets:3, reps:8,  rest:90},
+  {id:'pulldown', n:'פולי עליון',       sub:'אחיזה ניטרלית', sets:3, reps:6,  rest:120},
+  {id:'legext',   n:'פשיטת רגליים',                         sets:3, reps:10, rest:75},
+  {id:'legcurl',  n:'כפיפת רגליים',                         sets:3, reps:10, rest:75},
+  {id:'latraise', n:'הרחקת כתפיים',                         sets:3, reps:15, rest:50},
+  {id:'curl',     n:'דו־ראשי',          sub:'מוט אולימפי',   sets:3, reps:8,  rest:90, bar:20},
+  {id:'skull',    n:'לחיצה צרפתית',                         sets:3, reps:8,  rest:90, bar:7.5},
+  {id:'calf',     n:'תאומים בישיבה',                        sets:3, reps:12, rest:75},
+  {id:'absm',     n:'בטן במכונה',                           sets:3, reps:20, rest:null},
 ];
-const EX=Object.fromEntries(PROGRAM.map(e=>[e.id,e]));
-const TOTAL=PROGRAM.reduce((a,e)=>a+e.sets,0);
+// תרגילים שיצאו מהתוכנית — נשארים בהיסטוריה
+const RETIRED=[
+  {id:'abs', n:'בטן', sub:'בוסו', sets:3, reps:null, rest:null, bw:true, retired:true},
+];
+const ALL=[...PROGRAM,...RETIRED];
+const EX=Object.fromEntries(ALL.map(e=>[e.id,e]));
 
 /* ---------- עזרים ---------- */
 const pad=n=>String(n).padStart(2,'0');
@@ -324,47 +423,76 @@ const rel=s=>{const n=dayDiff(s,today());return n<=0?'היום':n===1?'אתמו�
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>n==null?'':String(+(+n).toFixed(2));
 const restTxt=s=>s<60?`${s} שנ׳`:`${Math.floor(s/60)}:${pad(s%60)} דק׳`;
+const durTxt=ms=>{const t=Math.max(0,Math.floor(ms/1000)),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return h?`${h}:${pad(m)}:${pad(s)}`:`${m}:${pad(s)}`};
 const haptic=p=>{try{navigator.vibrate&&navigator.vibrate(p||8)}catch(e){}};
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const has=v=>v!=null;
+const tw=(e,w)=>w==null?null:(e.bar!=null?e.bar+2*w:w);   // משקל כולל
+const wT=(e,w)=>has(w)?fmt(tw(e,w)):'–';
 
 /* ---------- אחסון ---------- */
 const KEY='gymTracker.v1';
 let storageOK=true;
 try{localStorage.setItem('__t','1');localStorage.removeItem('__t')}catch(e){storageOK=false}
 function load(){try{const s=localStorage.getItem(KEY);return s?JSON.parse(s):null}catch(e){return null}}
-let S=load()||{v:1,created:Date.now(),lastExport:null,sessions:{}};
+let S=load()||{v:2,created:Date.now(),lastExport:null,sessions:{}};
 if(!S.sessions)S.sessions={};
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){storageOK=false}}
 if(storageOK&&navigator.storage&&navigator.storage.persist&&location.protocol.startsWith('http'))navigator.storage.persist().catch(()=>{});
 
+// v1 → v2: בדו־ראשי ובצרפתית עוברים לרישום "משקל לצד"
+function migrate(){
+  if((S.v||1)>=2)return;
+  const notes=[];
+  for(const [d,s] of Object.entries(S.sessions)){
+    for(const id of ['curl','skull']){
+      const e=EX[id],a=s.ex&&s.ex[id];if(!a)continue;const seen=new Map();
+      for(const st of a){if(!st||!has(st.w))continue;const was=st.w;
+        if(was>=e.bar)st.w=Math.round((was-e.bar)/2*4)/4;
+        seen.set(was+'|'+st.w,[was,st.w])}
+      if(seen.size)notes.push({d,id,vals:[...seen.values()]});
+    }
+    if(s.done&&!s.end)s.end=s.t1;
+  }
+  S.v=2;if(notes.length)S.migNote=notes;save();
+}
+migrate();
+
 /* ---------- נתונים ---------- */
-const has=v=>v!=null;
+const filledD=x=>!!x&&(has(x.w)||has(x.r));
 const isDone=(s,e)=>!!s&&has(s.r)&&(e.bw||has(s.w));
-const anyV=s=>!!s&&(has(s.w)||has(s.r));
+const anyV=s=>!!s&&(has(s.w)||has(s.r)||(s.d||[]).some(filledD));
 const sess=d=>S.sessions[d]||null;
 const arrOf=(d,id)=>(S.sessions[d]&&S.sessions[d].ex[id])||[];
+const exHas=(d,id)=>arrOf(d,id).some(anyV);
 const sessHasData=s=>!!s&&Object.values(s.ex||{}).some(a=>a.some(anyV));
+const finished=s=>!!s&&!!(s.done||s.end);
 const datesDesc=()=>Object.keys(S.sessions).filter(k=>sessHasData(S.sessions[k])).sort().reverse();
 const before=d=>datesDesc().filter(k=>k<d);
+const exList=d=>PROGRAM.concat(RETIRED.filter(e=>exHas(d,e.id)));
+const viewList=d=>ALL.filter(e=>exHas(d,e.id));
+const totalOf=d=>exList(d).reduce((a,e)=>a+e.sets,0);
 function doneCount(d,e){const a=arrOf(d,e.id);let n=0;for(let i=0;i<e.sets;i++)if(isDone(a[i],e))n++;return n}
-const totalDone=d=>PROGRAM.reduce((n,e)=>n+doneCount(d,e),0);
-const firstOpen=d=>PROGRAM.find(e=>doneCount(d,e)<e.sets);
-// האימון האחרון (לפני d) שבו התרגיל בוצע — ממנו מגיעים הערכים הדהויים
+const totalDone=d=>exList(d).reduce((n,e)=>n+doneCount(d,e),0);
+const firstOpen=d=>exList(d).find(e=>doneCount(d,e)<e.sets);
 function prevSess(id,d){for(const k of before(d)){const a=S.sessions[k].ex[id];if(a&&a.some(anyV))return{d:k,a}}return null}
-function setVal(d,id,i,f,v){
-  let s=S.sessions[d];
-  if(!s){if(v==null)return;s=S.sessions[d]={t0:Date.now(),t1:Date.now(),done:false,ex:{}}}
-  const a=s.ex[id]||(s.ex[id]=[]);
-  while(a.length<=i)a.push({w:null,r:null});
-  a[i][f]=v;s.t1=Date.now();
-  if(!sessHasData(s))delete S.sessions[d];
+const prevSet=(id,d,i)=>{const p=prevSess(id,d);return p?p.a[i]:null};
+function newSess(d){const s=S.sessions[d]={t0:Date.now(),t1:Date.now(),ex:{}};if(S.active&&S.active.d===d)s.start=S.active.t0;return s}
+function setOf(d,id,i){const s=S.sessions[d]||newSess(d);const a=s.ex[id]||(s.ex[id]=[]);while(a.length<=i)a.push({w:null,r:null});return a[i]}
+function setVal(d,id,i,f,v,j){
+  if(v!=null||S.sessions[d]){
+    const st=setOf(d,id,i);
+    if(j==null)st[f]=v;else{st.d=st.d||[];while(st.d.length<=j)st.d.push({w:null,r:null});st.d[j][f]=v}
+    const s=S.sessions[d];s.t1=Date.now();
+  }
   save();
 }
-const better=(x,y,e)=>e.bw?x.r>y.r:(x.w>y.w||(x.w===y.w&&x.r>y.r));
+// חזרות בסט כולל ירידות משקל
+const tr=s=>(s.r||0)+(s.d||[]).reduce((a,x)=>a+(has(x.r)?x.r:0),0);
+const better=(x,y,e)=>e.bw?x.r>y.r:(x.w>y.w||(x.w===y.w&&tr(x)>tr(y)));
 function best(a,e){let b=null;for(const s of a||[])if(isDone(s,e)&&(!b||better(s,b,e)))b=s;return b}
 function bestBefore(id,d){const e=EX[id];let b=null;for(const k of before(d)){const s=best(S.sessions[k].ex[id],e);if(s&&(!b||better(s,b,e)))b=s}return b}
 function isPR(id,d){const e=EX[id],c=best(arrOf(d,id),e),b=bestBefore(id,d);return!!(c&&b&&better(c,b,e))}
-// בפעם הקודמת כל הסטים הגיעו ליעד החזרות → כדאי להעלות משקל (אלא אם כבר העלית היום)
 function readyUp(id,d){
   const e=EX[id];if(e.bw||!e.reps)return false;
   const p=prevSess(id,d);if(!p)return false;
@@ -372,31 +500,46 @@ function readyUp(id,d){
   const pw=Math.max(...p.a.slice(0,e.sets).map(s=>s.w));
   return!arrOf(d,id).some(s=>s&&has(s.w)&&s.w>pw);
 }
-const setTxt=(b,e)=>e.bw?`${b.r} חזרות`:`${fmt(b.w)}×${b.r}`;
+const setTxt=(b,e)=>e.bw?`${b.r} חזרות`:`${wT(e,b.w)}×${b.r}`;
+// "30×8+25×7" — כולל ירידות משקל; משקל כולל
+function setStr(s,e){
+  if(e.bw)return`<span class="ltr">${s.r??'–'}</span>`;
+  const parts=[`${wT(e,s.w)}×${s.r??'–'}`].concat((s.d||[]).filter(filledD).map(x=>`${wT(e,x.w)}×${x.r??'–'}`));
+  return`<span class="ltr">${parts.join('+')}</span>`;
+}
 function stats(d){
   const s=sess(d);let sets=0,vol=0;const imp=[],prs=[];
-  for(const e of PROGRAM){
+  for(const e of exList(d)){
     const a=arrOf(d,e.id);
-    for(let i=0;i<e.sets;i++){const x=a[i];if(isDone(x,e)){sets++;if(!e.bw)vol+=x.w*x.r}}
+    for(let i=0;i<a.length;i++){const x=a[i];
+      if(i<e.sets&&isDone(x,e))sets++;
+      if(!e.bw&&x){if(has(x.w)&&has(x.r))vol+=tw(e,x.w)*x.r;for(const y of x.d||[])if(has(y.w)&&has(y.r))vol+=tw(e,y.w)*y.r}}
     const c=best(a,e);if(!c)continue;
     const p=prevSess(e.id,d),pb=p&&best(p.a,e);
     if(pb&&better(c,pb,e))imp.push({e,from:pb,to:c});
     if(isPR(e.id,d))prs.push(e.id);
   }
-  const dur=s&&s.t0&&s.t1?Math.round((s.t1-s.t0)/6e4):0;
-  return{sets,vol:Math.round(vol),dur,imp,prs};
+  const st=s&&(s.start||s.t0),en=s&&(s.end||s.t1);
+  return{sets,vol:Math.round(vol),dur:st&&en?Math.round((en-st)/6e4):0,imp,prs};
 }
+// אימון פעיל שנשאר פתוח מיום קודם — נסגר אוטומטית
+function endStale(){const a=S.active;if(a&&a.d!==today()){const s=sess(a.d);if(s){s.end=s.end||s.t1;s.done=true}S.active=null;save()}}
+endStale();
 
 /* ---------- אייקונים ---------- */
 const sv=(p,w=2)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 const I={
   check:sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>',3),
   x:sv('<path d="M6 6l12 12M18 6L6 18"/>',2.2),
+  plus:sv('<path d="M12 5v14M5 12h14"/>',2.4),
   down:sv('<path d="M6 9l6 6 6-6"/>',2.2),
   left:sv('<path d="M15 6l-6 6 6 6"/>',2.2),
+  right:sv('<path d="M9 6l6 6-6 6"/>',2.2),
   up:sv('<path d="M12 19V5M6 11l6-6 6 6"/>',2.4),
+  corner:sv('<path d="M6 4v7a4 4 0 004 4h9"/><path d="M15 11l4 4-4 4"/>'),
   clock:sv('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
   layers:sv('<path d="M4 7h16M4 12h16M4 17h16"/>'),
+  bar:sv('<path d="M2 12h20M6 8v8M18 8v8"/>'),
   dumbbell:sv('<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/>',2.2),
   chart:sv('<path d="M4 4v15a1 1 0 001 1h15"/><path d="M8 15l3.5-4 3 2.5L20 7"/>'),
   save:sv('<path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>'),
@@ -408,94 +551,190 @@ const I={
   history:sv('<path d="M3 12a9 9 0 109-9 9.7 9.7 0 00-6.7 2.8L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/>'),
   edit:sv('<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>'),
   spark:sv('<path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/>'),
+  info:sv('<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>'),
   tap:sv('<path d="M9 11V5.5a1.5 1.5 0 013 0V11m0-1.5a1.5 1.5 0 013 0V11m0-.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-.5a6 6 0 01-4.6-2.2L4.7 15.3a1.6 1.6 0 012.4-2.1L9 15"/>'),
 };
+// המשקולת של האייקון
+const DB='<span class="dbi"><svg viewBox="-50 -28 100 56" aria-hidden="true"><rect x="-30" y="-5" width="60" height="10" rx="3"/><rect x="-36" y="-26" width="14" height="52" rx="6"/><rect x="22" y="-26" width="14" height="52" rx="6"/><rect x="-48" y="-16" width="9" height="32" rx="4.5"/><rect x="39" y="-16" width="9" height="32" rx="4.5"/></svg></span>';
 
 /* =========================================================
    מצב תצוגה
+   tab: w (אימון/לוח שנה) | h (היסטוריה) | b (גיבוי)
+   subs[tab]: מסך פנימי {mode:'live'|'view'|'edit', d}
    ========================================================= */
-let tab='w', cur=today(), followToday=true, hseg='s';
-let userCol={};               // פתיחה/סגירה ידנית של כרטיס
-const prFired=new Set();      // שיאים שכבר נחגגו
-const justDone=new Set();     // תרגילים שהושלמו עכשיו (לקיפול אוטומטי)
+let tab='w', hseg='s', calM=today().slice(0,7), cur=today(), mode=null;
+const subs={w:null,h:null};
+let userCol={};
+const prFired=new Set(), justDone=new Set(), hideGhost=new Set();
 const view=document.getElementById('view'), topEl=document.getElementById('top'), navEl=document.getElementById('nav');
+
+/* ---------- חזרה אחורה (כפתור/מחווה של אנדרואיד) ---------- */
+let ignorePop=0, afterPop=null;
+function goBack(then){ignorePop++;afterPop=then||null;history.back()}
+function openSub(t,sub){subs[t]=sub;userCol={};history.pushState({sub:1},'');render(true);scrollTo(0,0)}
+function leaveSub(){
+  const done=()=>{subs[tab]=null;userCol={};render(true);scrollTo(0,0)};
+  if(history.state&&history.state.sub)goBack(done);else done();
+}
+addEventListener('popstate',()=>{
+  if(ignorePop>0){ignorePop--;const f=afterPop;afterPop=null;f&&f();return}
+  if(sheetOpen){closeSheet(true);return}
+  if(subs[tab]){subs[tab]=null;userCol={};render(true);scrollTo(0,0)}
+});
 
 function render(anim){
   renderNav();
-  if(tab==='w')renderW();else if(tab==='h')renderH();else renderB();
-  if(anim){for(const el of [view,topEl]){el.classList.remove('enter');void el.offsetWidth;el.classList.add('enter')}}
+  const sub=subs[tab];
+  if(tab==='b')renderB();
+  else if(sub)renderSession(sub);
+  else if(tab==='w')renderCal();
+  else renderH();
+  if(anim){for(const el of [view,topEl]){el.classList.remove('enter','anim-next','anim-prev');void el.offsetWidth;el.classList.add('enter')}}
 }
 function renderNav(){
-  const n=datesDesc().length;
-  const stale=n>=3&&(!S.lastExport||Date.now()-S.lastExport>14*864e5);
+  const n=datesDesc().length,stale=n>=3&&(!S.lastExport||Date.now()-S.lastExport>14*864e5);
   navEl.innerHTML=[['w','אימון',I.dumbbell],['h','היסטוריה',I.chart],['b','גיבוי',I.save]].map(([k,l,ic])=>
     `<button class="${tab===k?'on':''}" data-act="tab" data-val="${k}">${ic}<span>${l}</span>${k==='b'&&stale?'<i class="badge"></i>':''}</button>`).join('');
 }
 
-/* ---------- מסך אימון ---------- */
-function segHtml(e){const n=doneCount(cur,e);return`<button class="seg-i${n>=e.sets?' full':''}" data-act="jump" data-val="${e.id}" aria-label="${esc(e.n)}"><span><i style="width:${n/e.sets*100}%"></i></span></button>`}
-function renderW(){
-  const d=cur,isToday=d===today(),s=sess(d),prevD=before(d)[0],now=firstOpen(d),done=totalDone(d);
-  topEl.innerHTML=`<div class="whead">
-      <div class="wt"><small>${isToday?'האימון של היום':'עריכת אימון קודם'}</small><b>${wday(d)}, ${dm(d)}</b></div>
-      <div class="wcount"><div class="nums"><span class="num" id="cnt">${done}</span><span class="of">/${TOTAL}</span></div><small>סטים</small></div>
-    </div>
-    <div class="segs" style="grid-template-columns:repeat(${PROGRAM.length},1fr)">${PROGRAM.map(segHtml).join('')}</div>`;
-  for(const e of PROGRAM)if(isPR(e.id,d))prFired.add(d+'|'+e.id);
+/* ---------- לוח שנה ---------- */
+function renderCal(){
+  const [y,m]=calM.split('-').map(Number),first=new Date(y,m-1,1),days=new Date(y,m,0).getDate(),off=first.getDay(),td=today();
+  const isNow=calM===td.slice(0,7);
+  topEl.innerHTML=`<div class="calnav"><button class="ibtn" data-act="month" data-val="-1" aria-label="חודש קודם">${I.right}</button><h1>${first.toLocaleDateString('he-IL',{month:'long',year:'numeric'})}</h1>${isNow?'':'<button class="btn sm line" data-act="mnow">היום</button>'}<button class="ibtn" data-act="month" data-val="1" aria-label="חודש הבא">${I.left}</button></div>`;
+  let g=['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ש׳'].map(h=>`<span class="h">${h}</span>`).join('')+'<span class="cd out"></span>'.repeat(off),cnt=0;
+  for(let i=1;i<=days;i++){
+    const d=`${y}-${pad(m)}-${pad(i)}`,w=sessHasData(S.sessions[d]);if(w)cnt++;
+    g+=`<button class="cd${w?' w':''}${d===td?' today':''}${d>td?' fut':''}"${w?` data-act="openday" data-val="${d}"`:' tabindex="-1"'} style="--i:${i}" aria-label="${i}${w?' — אימון':''}"><span class="dn">${i}</span>${w?DB:''}</button>`;
+  }
+  const mname=first.toLocaleDateString('he-IL',{month:'long'});
   let h='';
-  if(!isToday)h+=`<div class="notice info">${I.edit}<span>עריכה של האימון מ${wday(d)} ${dm(d)}</span><button class="btn sm pri" data-act="today">להיום</button></div>`;
-  if(!prevD&&isToday)h+=`<div class="notice soft">${I.spark}<span><b>אימון ראשון.</b> מה שתרשום היום יופיע בדהוי בתיבות באימון הבא.</span></div>`;
+  if(S.migNote)h+=migHtml();
+  h+=`<div class="cal"><div class="calg">${g}</div><div class="calsum">${cnt?`<span><b>${cnt}</b> ${cnt===1?'אימון':'אימונים'} ב${mname}</span>`:`<span>אין אימונים ב${mname}</span>`}</div></div>`;
+  const s=sess(td),act=S.active&&S.active.d===td,data=sessHasData(s);
+  h+='<div class="startbox">';
+  if(act)h+=`<button class="btn pri block start live" data-act="start">${I.dumbbell}<span>המשך אימון</span><span class="ct ltr" id="ctimer">${durTxt(Date.now()-S.active.t0)}</span></button>${data?'':'<button class="linkbtn" data-act="cancel">ביטול האימון</button>'}`;
+  else if(data&&finished(s)){const st=stats(td);h+=`<div class="donebox">${I.check}<span><b>האימון של היום הושלם</b>${st.sets} סטים${st.dur>=5?` · ${st.dur} דקות`:''}</span></div><button class="btn line block" data-act="openday" data-val="${td}">צפייה באימון של היום</button>`}
+  else if(data)h+=`<button class="btn pri block start" data-act="start">${I.dumbbell}<span>המשך אימון</span></button>`;
+  else h+=`<button class="btn pri block start" data-act="start">${I.dumbbell}<span>התחל אימון</span></button>`;
+  const lw=before(td)[0];
+  if(lw)h+=`<p class="lastw">אימון אחרון: <b>${wday(lw)} ${dm(lw)}</b> · ${rel(lw)}</p>`;
+  h+='</div>';
+  view.innerHTML=h;
+}
+function migHtml(){
+  const rows=S.migNote.map(n=>{const e=EX[n.id];return`<span class="mrow">${esc(e.n)} (${dm(n.d)}): ${n.vals.map(([a,b])=>a===b?`רשמת ${fmt(a)} → נשאר ${fmt(b)} לצד = ${fmt(tw(e,b))} סה״כ`:`רשמת ${fmt(a)} → ${fmt(b)} לצד = ${fmt(tw(e,b))} סה״כ`).join(' · ')}</span>`}).join('');
+  return`<div class="notice soft mig">${I.info}<span>בדו־ראשי ובלחיצה צרפתית רושמים עכשיו משקל לצד אחד. כך פירשתי את מה שכבר רשמת:${rows}<span class="acts"><button class="btn sm pri" data-act="openday" data-val="${S.migNote[0].d}">לבדיקה</button><button class="btn sm line" data-act="migok">נכון, הבנתי</button></span></span></div>`;
+}
+function shiftMonth(n){
+  const[y,m]=calM.split('-').map(Number),d=new Date(y,m-1+n,1);calM=d.getFullYear()+'-'+pad(d.getMonth()+1);
+  render();view.classList.remove('anim-next','anim-prev','enter');void view.offsetWidth;view.classList.add(n>0?'anim-next':'anim-prev');
+}
+function startLive(){
+  const d=today(),s=sess(d);
+  if(!S.active||S.active.d!==d)S.active={d,t0:(s&&(s.start||s.t0))||Date.now()};
+  if(s){s.start=s.start||S.active.t0;s.done=false;delete s.end}
+  save();openSub('w',{mode:'live',d});
+}
+
+/* ---------- מסך אימון: live / view / edit ---------- */
+function segHtml(e){const n=doneCount(cur,e);return`<button class="seg-i${n>=e.sets?' full':''}" data-act="jump" data-val="${e.id}" aria-label="${esc(e.n)}"><span><i style="width:${n/e.sets*100}%"></i></span></button>`}
+function renderSession(sub){
+  const d=cur=sub.d;mode=sub.mode;
+  if(mode==='live'&&!(S.active&&S.active.d===d))mode=sub.mode=sessHasData(sess(d))?'view':'live';
+  const s=sess(d),list=mode==='view'?viewList(d):exList(d),TOT=totalOf(d),done=totalDone(d),isToday=d===today();
+  let mid,right='';
+  if(mode==='live'){mid=`<small>האימון של היום · ${wday(d)} ${dm(d)}</small><b class="timer" id="timer">${durTxt(Date.now()-(S.active?S.active.t0:Date.now()))}</b>`;
+    right=`<div class="wcount"><div class="nums"><span class="num" id="cnt">${done}</span><span class="of">/${TOT}</span></div><small>סטים</small></div>`}
+  else if(mode==='edit'){mid=`<small>עריכה</small><b>${wday(d)}, ${dm(d)}</b>`;right=`<button class="btn sm pri" data-act="editdone">${I.check}סיום</button>`}
+  else{mid=`<small>${rel(d)}</small><b>${wday(d)}, ${dm(d)}</b>`;right=`<button class="btn sm line" data-act="edit">${I.edit}ערוך</button>`}
+  topEl.innerHTML=`<div class="subhead"><button class="ibtn" data-act="back" aria-label="חזרה">${I.right}</button><div class="wt">${mid}</div>${right}</div>`+
+    (mode==='view'?'':`<div class="segs" style="grid-template-columns:repeat(${list.length},1fr)">${list.map(segHtml).join('')}</div>`);
+  for(const e of list)if(isPR(e.id,d))prFired.add(d+'|'+e.id);
+  let h='';
+  if(mode==='view'){
+    const st=stats(d);
+    h+=`<div class="tiles vtiles"><div><span class="num">${st.sets}</span><small>סטים</small></div><div><span class="num">${st.vol.toLocaleString('he-IL')}</span><small>ק״ג נפח</small></div><div><span class="num">${st.dur>=1?st.dur:'–'}</span><small>דקות</small></div></div>`;
+    h+=list.length?list.map((e,k)=>viewCard(e,k,d)).join(''):`<div class="emptyst">${I.dumbbell}<b>אין נתונים באימון הזה</b></div>`;
+    view.innerHTML=h;return;
+  }
+  const prevD=before(d)[0],now=firstOpen(d);
+  if(mode==='edit')h+=`<div class="notice info">${I.edit}<span>עריכה. כל שינוי נשמר מיד.</span></div>`;
+  if(!prevD&&isToday&&mode==='live')h+=`<div class="notice soft">${I.spark}<span><b>אימון ראשון.</b> מה שתרשום היום יופיע בדהוי בתיבות באימון הבא.</span></div>`;
   else if(prevD)h+=`<div class="prevline">${I.history}<span>אימון קודם: <b>${wday(prevD)} ${dm(prevD)}</b> · ${rel(prevD)}</span></div>`;
   if(prevD&&!S.tipGhost&&done===0)h+=`<div class="notice soft tip">${I.tap}<span>אותו משקל כמו בפעם הקודמת? נגיעה במספר הסט מעתיקה אליו את הערכים הדהויים.</span></div>`;
-  h+=PROGRAM.map((e,k)=>card(e,k,d,now)).join('');
-  h+=`<button class="btn pri block finish${done===TOTAL?' glow':''}${s?'':' off'}" id="finish" data-act="finish" style="--i:9">${I.flag}<span>${s&&s.done?'סיכום האימון':'סיום אימון'}</span></button>`;
-  if(!isToday&&s)h+=`<button class="btn danger block" data-act="delsess" style="margin-top:10px">מחיקת האימון הזה</button>`;
+  h+=list.map((e,k)=>card(e,k,d,now)).join('');
+  if(mode==='live')h+=`<button class="btn pri block finish${done===TOT?' glow':''}${sessHasData(s)?'':' off'}" id="finish" data-act="finish" style="--i:10">${I.flag}<span>סיום אימון</span></button>`;
+  else{h+=`<button class="btn pri block" data-act="editdone" style="margin-top:6px">${I.check}סיום עריכה</button>`;
+    if(sessHasData(s))h+=`<button class="btn danger block" data-act="delsess" style="margin-top:10px">מחיקת האימון הזה</button>`}
   view.innerHTML=h;
+}
+function viewCard(e,k,d){
+  const a=arrOf(d,e.id),p=prevSess(e.id,d),n=doneCount(d,e),rows=[];
+  for(let i=0;i<Math.max(e.sets,a.length);i++){
+    const c=a[i];if(i>=e.sets&&!anyV(c))continue;const ok=isDone(c,e);
+    rows.push(`<div class="vrow"><span class="vb${ok?' ok':''}">${ok?I.check:i+1}</span><span class="vv">${anyV(c)?setStr(c,e)+(e.bw?' <small>חזרות</small>':e.bar!=null&&has(c.w)?`<small>${fmt(c.w)} לצד</small>`:''):'<span class="muted">—</span>'}</span><span class="dl">${deltaHtml(c,p&&p.a[i],e)}</span></div>`);
+  }
+  return`<section class="ex vw${n>=e.sets?' comp':''}" style="--i:${k}"><div class="exh"><span class="exn"><span class="num">${k+1}</span>${I.check}</span><span class="ext"><b>${esc(e.n)}</b>${e.sub?`<small>${esc(e.sub)}</small>`:''}</span><span class="exst">${isPR(e.id,d)?`<span class="tag pr">${I.trophy}שיא</span>`:''}</span></div><div class="vrows">${rows.join('')}</div></section>`;
 }
 function statusHtml(e,d,now){
   const n=doneCount(d,e);let h='';
   if(isPR(e.id,d))h+=`<span class="tag pr">${I.trophy}שיא</span>`;
   if(n>0&&n<e.sets)h+=`<span class="tag cnt"><span><b>${n}</b>/${e.sets}</span></span>`;
-  else if(n===0&&now===e)h+=`<span class="tag now">עכשיו</span>`;
+  else if(n===0&&now===e&&mode==='live')h+=`<span class="tag now">עכשיו</span>`;
   return h+`<span class="chev">${I.down}</span>`;
 }
 function metaHtml(e,d){
   return`<span class="chip">${I.layers}<b>${e.sets}</b>סטים × <b>${e.reps||'מקס׳'}</b></span>`+
     (e.rest?`<span class="chip">${I.clock}מנוחה <b>${restTxt(e.rest)}</b></span>`:'')+
+    (e.bar!=null?`<span class="chip">${I.bar}מוט <b>${fmt(e.bar)}</b> ק״ג · רושמים צד אחד</span>`:'')+
     (readyUp(e.id,d)?`<span class="chip up">${I.up}עמדת ביעד בפעם הקודמת — להעלות משקל</span>`:'');
 }
 function sumLine(a,e){
   const parts=[];
-  for(let i=0;i<e.sets;i++){const s=a[i];if(!anyV(s))continue;
-    parts.push(`<span class="ltr">${e.bw?(s.r??'–'):`${has(s.w)?fmt(s.w):'–'}×${s.r??'–'}`}</span>`)}
+  for(let i=0;i<a.length;i++){const s=a[i];if(anyV(s))parts.push(setStr(s,e))}
   if(!parts.length)return'<span>לא בוצע</span>';
   return parts.join('<i class="dot">·</i>')+(e.bw?' <span>חזרות</span>':'');
 }
 function deltaHtml(c,pv,e){
   if(!isDone(c,e)||!isDone(pv,e))return'';
-  if(!e.bw){const dw=+(c.w-pv.w).toFixed(2);
+  if(!e.bw){const dw=+(tw(e,c.w)-tw(e,pv.w)).toFixed(2);
     if(dw>0)return`<span class="up"><b>+${fmt(dw)}</b><i>ק״ג</i></span>`;
     if(dw<0)return`<span class="dn"><b>−${fmt(-dw)}</b><i>ק״ג</i></span>`}
-  const dr=c.r-pv.r;
+  const dr=tr(c)-tr(pv);
   if(dr>0)return`<span class="up"><b>+${dr}</b><i>חזרות</i></span>`;
   if(dr<0)return`<span class="dn"><b>−${-dr}</b><i>חזרות</i></span>`;
   return`<span class="eq"><b>=</b><i>כמו קודם</i></span>`;
 }
-function setRow(e,i,c,pv){
-  const w=c&&has(c.w)?fmt(c.w):'', r=c&&has(c.r)?c.r:'';
-  const pw=pv&&has(pv.w)?fmt(pv.w):'', pr=pv&&has(pv.r)?pv.r:'';
-  const last=i===e.sets-1;
-  const at=`data-ex="${e.id}" data-i="${i}" autocomplete="off" autocorrect="off" spellcheck="false"`;
-  return`<div class="set${e.bw?' bw':''}${isDone(c,e)?' done':''}" data-i="${i}">
+const totTxt=(e,v,pv)=>has(v)?`סה״כ ${fmt(tw(e,v))}`:has(pv)?`סה״כ ${fmt(tw(e,pv))}`:`מוט ${fmt(e.bar)}`;
+const at=(e,i,j)=>`data-ex="${e.id}" data-i="${i}"${j!=null?` data-j="${j}"`:''} autocomplete="off" autocorrect="off" spellcheck="false"`;
+function wInput(e,i,j,c,pv){
+  const v=c&&has(c.w)?fmt(c.w):'',ph=pv&&has(pv.w)?fmt(pv.w):'';
+  const inp=`<input class="in${v?' has':''}" ${at(e,i,j)} data-f="w" inputmode="decimal" enterkeyhint="next" placeholder="${ph}" value="${v}" aria-label="${e.bar!=null?'משקל לצד':'משקל'}">`;
+  if(e.bar==null)return inp;
+  return`<span class="wbox">${inp}<span class="tot${v?'':' g'}">${totTxt(e,c&&c.w,pv&&pv.w)}</span></span>`;
+}
+function rInput(e,i,j,c,pv){
+  const v=c&&has(c.r)?c.r:'',ph=pv&&has(pv.r)?pv.r:'';
+  return`<input class="in${v!==''?' has':''}" ${at(e,i,j)} data-f="r" inputmode="numeric" enterkeyhint="next" placeholder="${ph}" value="${v}" aria-label="חזרות">`;
+}
+const dropCount=(d,e,i,c,pv)=>Math.max(c&&c.d?c.d.length:0,hideGhost.has(d+'|'+e.id+'|'+i)?0:(pv&&pv.d?pv.d.filter(filledD).length:0));
+function setBlock(e,i,c,pv,d){
+  let h=`<div class="set${e.bw?' bw':''}${isDone(c,e)?' done':''}" data-i="${i}">
     <button class="sb" data-act="ghost" data-ex="${e.id}" data-i="${i}" aria-label="סט ${i+1}"><span class="num">${i+1}</span>${I.check}</button>
-    ${e.bw?'':`<input class="in" ${at} data-f="w" inputmode="decimal" enterkeyhint="next" placeholder="${pw}" value="${w}" aria-label="משקל, סט ${i+1}"><span class="x">×</span>`}
-    <input class="in" ${at} data-f="r" inputmode="numeric" enterkeyhint="${last?'done':'next'}" placeholder="${pr}" value="${r}" aria-label="חזרות, סט ${i+1}">
+    ${e.bw?'':wInput(e,i,null,c,pv)+'<span class="x">×</span>'}${rInput(e,i,null,c,pv)}
     <span class="dl">${deltaHtml(c,pv,e)}</span>
+    ${e.bw?'<span></span>':`<button class="ab" data-act="adddrop" data-ex="${e.id}" data-i="${i}" aria-label="עוד משקל באותו סט">${I.plus}</button>`}
   </div>`;
+  if(e.bw)return h;
+  const n=dropCount(d,e,i,c,pv);
+  for(let j=0;j<n;j++){const dc=c&&c.d&&c.d[j],dp=pv&&pv.d&&pv.d[j];
+    h+=`<div class="set drop" data-i="${i}" data-j="${j}"><span class="dropi">${I.corner}</span>${wInput(e,i,j,dc,dp)}<span class="x">×</span>${rInput(e,i,j,dc,dp)}<span></span><button class="ab" data-act="rmdrop" data-ex="${e.id}" data-i="${i}" data-j="${j}" aria-label="הסרת המשקל הנוסף">${I.x}</button></div>`}
+  return h;
 }
 function card(e,k,d,now){
   const a=arrOf(d,e.id),comp=doneCount(d,e)>=e.sets,col=userCol[e.id]??comp,p=prevSess(e.id,d);
-  return`<section class="ex${comp?' comp':''}${now===e?' now':''}${col?' col':''}" id="ex-${e.id}" data-ex="${e.id}" style="--i:${k}">
+  return`<section class="ex${comp?' comp':''}${now===e&&mode==='live'?' now':''}${col?' col':''}" id="ex-${e.id}" data-ex="${e.id}" style="--i:${k}">
   <button class="exh" data-act="toggle" data-val="${e.id}" aria-expanded="${!col}">
     <span class="exn"><span class="num">${k+1}</span>${I.check}</span>
     <span class="ext"><b>${esc(e.n)}</b>${e.sub?`<small>${esc(e.sub)}</small>`:''}</span>
@@ -505,49 +744,58 @@ function card(e,k,d,now){
   <div class="exb"${col?' inert':''}><div class="clip">
     <div class="meta">${metaHtml(e,d)}</div>
     <div class="sets">
-      <div class="set sh${e.bw?' bw':''}" aria-hidden="true"><span>סט</span>${e.bw?'':'<span>משקל <i>ק״ג</i></span><span></span>'}<span>חזרות</span><span></span></div>
-      ${Array.from({length:e.sets},(_,i)=>setRow(e,i,a[i],p&&p.a[i])).join('')}
+      <div class="set sh${e.bw?' bw':''}" aria-hidden="true"><span>סט</span>${e.bw?'':`<span>${e.bar!=null?'לצד':'משקל'} <i>ק״ג</i></span><span></span>`}<span>חזרות</span><span></span><span></span></div>
+      ${Array.from({length:e.sets},(_,i)=>setBlock(e,i,a[i],p&&p.a[i],d)).join('')}
     </div>
     ${p?`<p class="prevd">בדהוי: ${wday(p.d)} ${dm(p.d)}</p>`:''}
   </div></div>
 </section>`;
 }
-function setCol(cardEl,on){cardEl.classList.toggle('col',on);cardEl.querySelector('.exb').inert=on;cardEl.querySelector('.exh').setAttribute('aria-expanded',String(!on))}
+function setCol(el,on){el.classList.toggle('col',on);el.querySelector('.exb').inert=on;el.querySelector('.exh').setAttribute('aria-expanded',String(!on))}
 function restart(el,cls){el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls)}
-
-// עדכון נקודתי בלי לבנות מחדש (כדי לא לאבד פוקוס/מקלדת)
-function patch(id,i){
-  const e=EX[id],d=cur,cardEl=document.getElementById('ex-'+id);if(!cardEl)return;
-  const row=cardEl.querySelector(`.set[data-i="${i}"]`),c=arrOf(d,id)[i],p=prevSess(id,d);
+function rerenderCard(id){
+  const el=document.getElementById('ex-'+id);if(!el)return;
+  const list=exList(cur),k=list.findIndex(e=>e.id===id);
+  el.outerHTML=card(EX[id],k,cur,firstOpen(cur));
+}
+// עדכון שורת סט אחרי הקלדה
+function rowUpdate(id,i){
+  const e=EX[id],el=document.getElementById('ex-'+id);if(!el)return;
+  const row=el.querySelector(`.set[data-i="${i}"]:not(.drop):not(.sh)`),c=arrOf(cur,id)[i];
   const was=row.classList.contains('done'),done=isDone(c,e);
   row.classList.toggle('done',done);
-  row.querySelector('.dl').innerHTML=deltaHtml(c,p&&p.a[i],e);
+  row.querySelector('.dl').innerHTML=deltaHtml(c,prevSet(id,cur,i),e);
   if(done&&!was){haptic();restart(row,'just')}
+}
+// עדכון הכרטיס, הכותרת והפס העליון
+function refresh(id,wasComp){
+  const e=EX[id],d=cur,el=document.getElementById('ex-'+id);if(!el)return;
   const n=doneCount(d,e),comp=n>=e.sets;
-  if(comp&&!cardEl.classList.contains('comp'))justDone.add(id);
+  if(wasComp==null)wasComp=el.classList.contains('comp');
+  if(comp&&!wasComp)justDone.add(id);
   if(!comp)justDone.delete(id);
-  cardEl.classList.toggle('comp',comp);
+  el.classList.toggle('comp',comp);
   const now=firstOpen(d);
-  document.querySelectorAll('.ex').forEach(el=>{const ee=EX[el.dataset.ex];el.classList.toggle('now',ee===now);el.querySelector('.exst').innerHTML=statusHtml(ee,d,now)});
-  cardEl.querySelector('.sumline').innerHTML=sumLine(arrOf(d,id),e);
-  cardEl.querySelector('.meta').innerHTML=metaHtml(e,d);
+  document.querySelectorAll('.ex[data-ex]').forEach(x=>{const ee=EX[x.dataset.ex];x.classList.toggle('now',ee===now&&mode==='live');x.querySelector('.exst').innerHTML=statusHtml(ee,d,now)});
+  el.querySelector('.sumline').innerHTML=sumLine(arrOf(d,id),e);
+  el.querySelector('.meta').innerHTML=metaHtml(e,d);
   const k=d+'|'+id;
-  if(isPR(id,d)){if(!prFired.has(k)){prFired.add(k);celebratePR(cardEl,e)}}else prFired.delete(k);
+  if(isPR(id,d)){if(!prFired.has(k)){prFired.add(k);celebratePR(el,e)}}else prFired.delete(k);
   const t=totalDone(d),cnt=document.getElementById('cnt');
   if(cnt&&cnt.textContent!==String(t)){cnt.textContent=t;restart(cnt,'bump')}
   const seg=document.querySelector(`.seg-i[data-val="${id}"]`);
   if(seg){seg.classList.toggle('full',comp);seg.querySelector('i').style.width=n/e.sets*100+'%'}
   const fb=document.getElementById('finish');
-  if(fb){fb.classList.toggle('glow',t===TOTAL);fb.classList.toggle('off',!sess(d))}
+  if(fb){fb.classList.toggle('glow',t===totalOf(d));fb.classList.toggle('off',!sessHasData(sess(d)))}
 }
-// כשיוצאים מכרטיס שהושלם: מקפלים וגוללים לתרגיל הבא
-function leave(cardEl){
-  const id=cardEl.dataset.ex;
-  if(!justDone.has(id)||cardEl.contains(document.activeElement))return;
-  justDone.delete(id);delete userCol[id];setCol(cardEl,true);
+// יציאה מכרטיס שהושלם: מקפלים וגוללים לתרגיל הבא
+function leave(el){
+  if(!el||!el.isConnected)return;const id=el.dataset.ex;
+  if(!justDone.has(id)||el.contains(document.activeElement))return;
+  justDone.delete(id);delete userCol[id];setCol(el,true);
   const nx=firstOpen(cur);
-  if(nx){const el=document.getElementById('ex-'+nx.id);setTimeout(()=>el&&el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}),360)}
-  else if(totalDone(cur)===TOTAL){const fb=document.getElementById('finish');setTimeout(()=>fb&&fb.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}),360)}
+  if(nx){const n2=document.getElementById('ex-'+nx.id);setTimeout(()=>n2&&n2.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}),360)}
+  else{const fb=document.getElementById('finish');setTimeout(()=>fb&&fb.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}),360)}
 }
 
 /* ---------- חגיגות ---------- */
@@ -565,32 +813,34 @@ function celebrate(){
     if(Date.now()<end)requestAnimationFrame(f);
   })();
 }
-function celebratePR(cardEl,e){
+function celebratePR(el,e){
   haptic([12,60,12]);
-  const tg=cardEl.querySelector('.tag.pr');if(tg)restart(tg,'pop');
-  burst(tg||cardEl,.55);
+  const tg=el.querySelector('.tag.pr');if(tg)restart(tg,'pop');
+  if(mode==='live')burst(tg||el,.55);
   toast(`שיא אישי חדש · ${e.n}`);
 }
 
-/* ---------- סיכום אימון ---------- */
+/* ---------- סיום אימון ---------- */
 function openFinish(){
-  const s=sess(cur);if(!s)return;
-  const st=stats(cur),first=!s.done,prev=before(cur).length>0,full=st.sets===TOTAL;
-  s.done=true;save();
-  const fb=document.querySelector('#finish span');if(fb)fb.textContent='סיכום האימון';
-  let body=`<div class="bigtitle"><span class="medal">${I.trophy}</span><p><b>${full?'אימון מלא.':`${st.sets} מתוך ${TOTAL} סטים.`}</b><br>${st.prs.length?`${st.prs.length===1?'שיא אישי חדש אחד':`${st.prs.length} שיאים אישיים חדשים`}.`:prev?'האימון נשמר.':'האימון הראשון נשמר. מהפעם הבאה תראה כאן השוואה.'}</p></div>
+  const d=cur,s=sess(d);if(!sessHasData(s))return;
+  if(!finished(s)){s.end=Date.now();s.done=true}
+  if(S.active&&S.active.d===d)S.active=null;
+  save();
+  const st=stats(d),prev=before(d).length>0,TOT=totalOf(d),full=st.sets>=TOT;
+  let body=`<div class="bigtitle"><span class="medal">${I.trophy}</span><p><b>${full?'אימון מלא.':`${st.sets} מתוך ${TOT} סטים.`}</b><br>${st.prs.length?`${st.prs.length===1?'שיא אישי חדש אחד':`${st.prs.length} שיאים אישיים חדשים`}.`:prev?'האימון נשמר.':'האימון הראשון נשמר. מהפעם הבאה תראה כאן השוואה.'}</p></div>
     <div class="tiles">
-      <div><span class="num">${st.sets}<i>/${TOTAL}</i></span><small>סטים</small></div>
+      <div><span class="num">${st.sets}<i>/${TOT}</i></span><small>סטים</small></div>
       <div><span class="num">${st.vol.toLocaleString('he-IL')}</span><small>ק״ג נפח</small></div>
-      <div><span class="num">${st.dur>=5?st.dur:'–'}</span><small>דקות (בערך)</small></div>
+      <div><span class="num">${st.dur>=1?st.dur:'–'}</span><small>דקות</small></div>
     </div>`;
   if(prev){
     body+=`<h4 class="lbl">לעומת הפעם הקודמת · הסט הטוב ביותר</h4>`;
     body+=st.imp.length?st.imp.map(x=>`<div class="imp">${I.up}<b>${esc(x.e.n)}</b><span class="ltr">${setTxt(x.from,x.e)} → ${setTxt(x.to,x.e)}</span>${st.prs.includes(x.e.id)?`<span class="tag pr">${I.trophy}שיא</span>`:''}</div>`).join('')
       :'<p class="muted">אין שיפור בסט הטוב ביותר באף תרגיל הפעם.</p>';
   }
-  openSheet({title:full?'כל הכבוד':'סיכום האימון',sub:`${wday(cur)}, ${dm(cur)}`,body,foot:'<button class="btn pri block" data-act="close">סגירה</button>'});
-  if(first&&st.sets>0){haptic([15,50,15,50,30]);setTimeout(celebrate,250)}
+  openSheet({title:full?'כל הכבוד':'סיכום האימון',sub:`${wday(d)}, ${dm(d)}`,body,foot:'<button class="btn pri block" data-act="close">סגירה</button>',
+    onClose:()=>{if(subs.w&&subs.w.mode==='live'){if(tab==='w')leaveSub();else subs.w=null}}});
+  if(st.sets>0){haptic([15,50,15,50,30]);setTimeout(celebrate,250)}
 }
 
 /* ---------- היסטוריה ---------- */
@@ -601,22 +851,22 @@ function renderH(){
   if(!list.length){view.innerHTML=`<div class="emptyst">${I.dumbbell}<b>עוד אין אימונים</b>אחרי האימון הראשון הוא יופיע כאן.</div>`;return}
   if(hseg==='s'){
     view.innerHTML=list.map((d,k)=>{
-      const st=stats(d),nx=list[k+1],gap=nx?dayDiff(nx,d):0;
-      return`<button class="hcard" data-act="open" data-val="${d}" style="--i:${Math.min(k,10)}">
+      const st=stats(d),nx=list[k+1],gap=nx?dayDiff(nx,d):0,el=exList(d);
+      return`<button class="hcard" data-act="openh" data-val="${d}" style="--i:${Math.min(k,10)}">
         <span class="t"><b>${wday(d)}, ${dm(d)}</b><small>${rel(d)}</small>${st.prs.length?`<span class="tag pr">${I.trophy}${st.prs.length>1?st.prs.length+' שיאים':'שיא'}</span>`:''}<span class="chev">${I.left}</span></span>
-        <span class="st"><span><b class="num">${st.sets}</b>/${TOTAL} סטים</span><span><b class="num">${st.vol.toLocaleString('he-IL')}</b> ק״ג נפח</span>${st.dur>=5?`<span><b class="num">${st.dur}</b> דק׳</span>`:''}</span>
-        <span class="hdots" style="grid-template-columns:repeat(${PROGRAM.length},1fr)">${PROGRAM.map(e=>{const n=doneCount(d,e);return`<i class="${n>=e.sets?'on':n?'part':''}"></i>`}).join('')}</span>
+        <span class="st"><span><b class="num">${st.sets}</b> סטים</span><span><b class="num">${st.vol.toLocaleString('he-IL')}</b> ק״ג נפח</span>${st.dur>=5?`<span><b class="num">${st.dur}</b> דק׳</span>`:''}</span>
+        <span class="hdots" style="grid-template-columns:repeat(${el.length},1fr)">${el.map(e=>{const n=doneCount(d,e);return`<i class="${n>=e.sets?'on':n?'part':''}"></i>`}).join('')}</span>
       </button>${gap>1?`<div class="gap">${gap-1===1?'יום מנוחה':`${gap-1} ימי מנוחה`}</div>`:''}`;
     }).join('');
-  }else view.innerHTML=PROGRAM.map(exProg).join('');
+  }else view.innerHTML=ALL.filter(e=>!e.retired||datesDesc().some(d=>exHas(d,e.id))).map(exProg).join('');
 }
 function exPoints(e){return datesDesc().slice().reverse().map(d=>({d,b:best(arrOf(d,e.id),e)})).filter(x=>x.b)}
 function exProg(e,k){
-  const pts=exPoints(e),val=b=>e.bw?b.r:b.w,last=pts[pts.length-1],first=pts[0];
+  const pts=exPoints(e),val=b=>e.bw?b.r:tw(e,b.w),last=pts[pts.length-1],first=pts[0];
   let top=null;for(const p of pts)if(!top||better(p.b,top,e))top=p.b;
   const diff=pts.length>1?+(val(last.b)-val(first.b)).toFixed(2):null;
   return`<button class="pcard" data-act="exhist" data-val="${e.id}" style="--i:${k}">
-    <span class="pv"><b>${esc(e.n)}</b>
+    <span class="pv"><b>${esc(e.n)}${e.retired?` <small style="display:inline">(${esc(e.sub)} · הוצא מהתוכנית)</small>`:''}</b>
       <small>${last?`אחרון <span class="ltr">${setTxt(last.b,e)}</span> · שיא <span class="ltr">${setTxt(top,e)}</span>`:'עוד לא בוצע'}</small>
       ${diff!=null?`<span class="pd ${diff>0?'up':diff<0?'dn':''}"><span class="ltr">${diff>0?'+':diff<0?'−':''}${fmt(Math.abs(diff))}</span> ${e.bw?'חזרות':'ק״ג'} מאז ${dm(first.d)}</span>`:''}
     </span>
@@ -631,8 +881,8 @@ function spark(v){
   return`<svg class="spark" viewBox="0 0 ${W} ${H}" aria-hidden="true"><polygon class="ar" points="${P},${H} ${pl} ${W-P},${H}"/><polyline points="${pl}"/><circle cx="${l[0]}" cy="${l[1]}" r="4"/></svg>`;
 }
 function openExSheet(id){
-  const e=EX[id],rows=datesDesc().filter(d=>arrOf(d,id).some(anyV));
-  openSheet({title:e.n,sub:`${e.sets} סטים × ${e.reps||'מקס׳'}${e.rest?' · מנוחה '+restTxt(e.rest):''}`,
+  const e=EX[id],rows=datesDesc().filter(d=>exHas(d,id));
+  openSheet({title:e.n,sub:`${e.sets} סטים × ${e.reps||'מקס׳'}${e.rest?' · מנוחה '+restTxt(e.rest):''}${e.bar!=null?` · מוט ${fmt(e.bar)} ק״ג`:''}`,
     body:rows.length?rows.map(d=>`<div class="xr"><span class="xd"><b>${dm(d)}${isPR(id,d)?I.trophy:''}</b><small>${wday(d)}</small></span><span class="xs">${sumLine(arrOf(d,id),e)}</span></div>`).join('')
       :'<p class="muted" style="margin-top:10px">עוד אין נתונים לתרגיל הזה.</p>'});
 }
@@ -670,17 +920,17 @@ document.getElementById('imp').addEventListener('change',async ev=>{
 });
 
 /* ---------- גיליון ---------- */
-const sheetEl=document.getElementById('sheet'),scrim=document.getElementById('scrim');let sheetOpen=false;
-function openSheet({title,sub,body,foot}){
+const sheetEl=document.getElementById('sheet'),scrim=document.getElementById('scrim');let sheetOpen=false,sheetCb=null;
+function openSheet({title,sub,body,foot,onClose}){
   sheetEl.innerHTML=`<div class="sh-top"><div class="grab"></div><div class="sh-head"><h2>${esc(title)}${sub?`<small>${esc(sub)}</small>`:''}</h2><button class="sh-close" data-act="close" aria-label="סגירה">${I.x}</button></div></div><div class="sh-body">${body}</div>${foot?`<div class="sh-foot">${foot}</div>`:''}`;
   if(!sheetOpen)history.pushState({sheet:1},'');
-  sheetOpen=true;sheetEl.classList.add('open');scrim.classList.add('open');
+  sheetOpen=true;sheetCb=onClose||null;sheetEl.classList.add('open');scrim.classList.add('open');
 }
 function closeSheet(fromPop){
   if(!sheetOpen)return;sheetOpen=false;sheetEl.classList.remove('open');scrim.classList.remove('open');
-  if(!fromPop&&history.state&&history.state.sheet)history.back();
+  const cb=sheetCb;sheetCb=null;
+  if(!fromPop&&history.state&&history.state.sheet)goBack(cb);else cb&&cb();
 }
-addEventListener('popstate',()=>{if(sheetOpen)closeSheet(true)});
 (()=>{let y0=null,dy=0;
   sheetEl.addEventListener('touchstart',e=>{const body=sheetEl.querySelector('.sh-body');if(e.target.closest('.sh-top')||(body&&body.scrollTop<=0&&e.target.closest('.sh-body'))){y0=e.touches[0].clientY;dy=0}else y0=null},{passive:true});
   sheetEl.addEventListener('touchmove',e=>{if(y0==null)return;dy=e.touches[0].clientY-y0;if(dy>0){sheetEl.style.transition='none';sheetEl.style.transform=`translateY(${dy}px)`}},{passive:true});
@@ -700,25 +950,50 @@ document.addEventListener('click',ev=>{
   const b=ev.target.closest('[data-act]');if(!b)return;
   const act=b.dataset.act,v=b.dataset.val;
   switch(act){
-    case'tab':if(sheetOpen)closeSheet();tab=v;render(true);scrollTo(0,0);break;
+    case'tab':if(sheetOpen)closeSheet();if(tab===v&&subs[v]){leaveSub();break}tab=v;render(true);scrollTo(0,0);break;
+    case'month':shiftMonth(+v);break;
+    case'mnow':calM=today().slice(0,7);render(true);break;
+    case'start':startLive();break;
+    case'cancel':{const s=sess(today());if(s&&!sessHasData(s))delete S.sessions[today()];S.active=null;save();render();toast('האימון בוטל');break}
+    case'openday':openSub('w',{mode:'view',d:v});break;
+    case'openh':openSub('h',{mode:'view',d:v});break;
+    case'back':leaveSub();break;
+    case'edit':subs[tab].mode='edit';userCol={};render(true);scrollTo(0,0);break;
+    case'editdone':subs[tab].mode='view';render(true);scrollTo(0,0);break;
+    case'migok':delete S.migNote;save();render();break;
     case'toggle':{const el=document.getElementById('ex-'+v),on=!el.classList.contains('col');userCol[v]=on;setCol(el,on);break}
     case'jump':{const el=document.getElementById('ex-'+v);if(!el)break;if(el.classList.contains('col')){userCol[v]=false;setCol(el,false)}el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});break}
     case'ghost':{
-      const id=b.dataset.ex,i=+b.dataset.i,e=EX[id],c=arrOf(cur,id)[i],p=prevSess(id,cur),pv=p&&p.a[i],row=b.closest('.set');
+      const id=b.dataset.ex,i=+b.dataset.i,e=EX[id],c=arrOf(cur,id)[i],pv=prevSet(id,cur,i);
       if(isDone(c,e))break;
       if(anyV(pv)){
-        const [wi,ri]=[row.querySelector('[data-f="w"]'),row.querySelector('[data-f="r"]')];
-        if(wi&&has(pv.w)&&!(c&&has(c.w))){setVal(cur,id,i,'w',pv.w);wi.value=fmt(pv.w)}
-        if(has(pv.r)&&!(c&&has(c.r))){setVal(cur,id,i,'r',pv.r);ri.value=pv.r}
+        const el=document.getElementById('ex-'+id),wasComp=el.classList.contains('comp');
+        if(!el.classList.contains('col'))userCol[id]=false;
+        if(!e.bw&&has(pv.w)&&!(c&&has(c.w)))setVal(cur,id,i,'w',pv.w);
+        if(has(pv.r)&&!(c&&has(c.r)))setVal(cur,id,i,'r',pv.r);
+        (pv.d||[]).forEach((x,j)=>{const cc=arrOf(cur,id)[i],cd=cc&&cc.d&&cc.d[j];
+          if(has(x.w)&&!(cd&&has(cd.w)))setVal(cur,id,i,'w',x.w,j);
+          if(has(x.r)&&!(cd&&has(cd.r)))setVal(cur,id,i,'r',x.r,j)});
         if(!S.tipGhost){S.tipGhost=true;save();const tp=document.querySelector('.tip');if(tp)tp.remove()}
-        patch(id,i);
-        const cardEl=b.closest('.ex');if(justDone.has(id))setTimeout(()=>leave(cardEl),550);
-      }else{const ins=[...row.querySelectorAll('.in')];(ins.find(x=>!x.value)||ins[0]).focus()}
+        rerenderCard(id);
+        const row=document.querySelector(`#ex-${id} .set[data-i="${i}"]:not(.drop):not(.sh)`);
+        if(row&&row.classList.contains('done')){haptic();restart(row,'just')}
+        refresh(id,wasComp);
+        if(justDone.has(id))setTimeout(()=>leave(document.getElementById('ex-'+id)),550);
+      }else{const row=b.closest('.set'),ins=[...row.querySelectorAll('.in')];(ins.find(x=>!x.value)||ins[0]).focus()}
       break}
+    case'adddrop':{
+      const id=b.dataset.ex,i=+b.dataset.i,e=EX[id],c=arrOf(cur,id)[i],pv=prevSet(id,cur,i);
+      const n=dropCount(cur,e,i,c,pv),st=setOf(cur,id,i);st.d=st.d||[];while(st.d.length<=n)st.d.push({w:null,r:null});save();
+      userCol[id]=false;rerenderCard(id);
+      const inp=document.querySelector(`#ex-${id} .set.drop[data-i="${i}"][data-j="${n}"] .in`);if(inp)inp.focus();
+      break}
+    case'rmdrop':{
+      const id=b.dataset.ex,i=+b.dataset.i,j=+b.dataset.j,c=arrOf(cur,id)[i];
+      if(c&&c.d&&j<c.d.length)c.d.splice(j,1);
+      hideGhost.add(cur+'|'+id+'|'+i);save();userCol[id]=false;rerenderCard(id);refresh(id);break}
     case'finish':openFinish();break;
-    case'today':cur=today();followToday=true;userCol={};render(true);scrollTo(0,0);break;
-    case'open':cur=v;followToday=v===today();tab='w';userCol={};render(true);scrollTo(0,0);break;
-    case'delsess':{const d=cur,keep=JSON.stringify(S.sessions[d]);delete S.sessions[d];save();cur=today();followToday=true;tab='h';render(true);
+    case'delsess':{const d=cur,keep=JSON.stringify(S.sessions[d]);delete S.sessions[d];if(S.active&&S.active.d===d)S.active=null;save();leaveSub();
       toast('האימון נמחק',()=>{S.sessions[d]=JSON.parse(keep);save();render();toast('שוחזר')});break}
     case'hseg':hseg=v;render(true);break;
     case'exhist':openExSheet(v);break;
@@ -726,18 +1001,21 @@ document.addEventListener('click',ev=>{
     case'undo':if(toastUndo){const u=toastUndo;toastUndo=null;u()}break;
     case'share':doShare();break;
     case'import':document.getElementById('imp').click();break;
-    case'doimport':if(pendingImport){S=pendingImport;if(!S.sessions)S.sessions={};pendingImport=null;save();closeSheet();cur=today();userCol={};prFired.clear();render(true);toast('הגיבוי שוחזר')}break;
+    case'doimport':if(pendingImport){S=pendingImport;if(!S.sessions)S.sessions={};pendingImport=null;migrate();save();closeSheet();subs.w=subs.h=null;userCol={};prFired.clear();render(true);toast('הגיבוי שוחזר')}break;
     case'refresh':(async()=>{try{const r=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()})();break;
   }
 });
 view.addEventListener('input',ev=>{
   const t=ev.target;if(!t.matches('.in'))return;
-  const f=t.dataset.f,raw=t.value;
+  const f=t.dataset.f,raw=t.value,id=t.dataset.ex,i=+t.dataset.i,j=t.dataset.j!=null?+t.dataset.j:null;
   const c=f==='w'?raw.replace(/,/g,'.').replace(/[^\d.]/g,'').replace(/(\..*)\./g,'$1').slice(0,6):raw.replace(/\D/g,'').slice(0,3);
   if(c!==raw)t.value=c;
-  const n=c===''||c==='.'?null:parseFloat(c);
-  setVal(cur,t.dataset.ex,+t.dataset.i,f,Number.isFinite(n)?n:null);
-  patch(t.dataset.ex,+t.dataset.i);
+  const n=c===''||c==='.'?null:parseFloat(c),val=Number.isFinite(n)?n:null;
+  setVal(cur,id,i,f,val,j);
+  t.classList.toggle('has',t.value!=='');
+  const box=t.parentElement;
+  if(box.classList.contains('wbox')){const e=EX[id],pv=prevSet(id,cur,i),pw=j==null?(pv&&pv.w):(pv&&pv.d&&pv.d[j]&&pv.d[j].w);const sp=box.querySelector('.tot');sp.textContent=totTxt(e,val,pw);sp.classList.toggle('g',val==null)}
+  rowUpdate(id,i);refresh(id);
 });
 view.addEventListener('keydown',ev=>{
   if(ev.key!=='Enter'||!ev.target.matches('.in'))return;ev.preventDefault();
@@ -745,19 +1023,31 @@ view.addEventListener('keydown',ev=>{
   if(k<list.length-1)list[k+1].focus();else ev.target.blur();
 });
 view.addEventListener('focusout',ev=>{const c=ev.target.closest&&ev.target.closest('.ex');if(c)setTimeout(()=>leave(c),150)});
-document.addEventListener('focusin',ev=>{if(ev.target.matches('.in')){document.body.classList.add('kb');ev.target.select&&setTimeout(()=>{try{ev.target.select()}catch(e){}},0)}});
+document.addEventListener('focusin',ev=>{if(ev.target.matches('.in')){document.body.classList.add('kb');setTimeout(()=>{try{ev.target.select()}catch(e){}},0)}});
 document.addEventListener('focusout',ev=>{if(ev.target.matches('.in'))setTimeout(()=>{const a=document.activeElement;if(!a||!a.matches('.in'))document.body.classList.remove('kb')},80)});
+// החלקה בין חודשים
+(()=>{let t0=null;
+  view.addEventListener('touchstart',e=>{t0=(tab==='w'&&!subs.w&&!sheetOpen&&e.touches.length===1)?{x:e.touches[0].clientX,y:e.touches[0].clientY}:null},{passive:true});
+  view.addEventListener('touchend',e=>{if(!t0)return;const p=e.changedTouches[0],dx=p.clientX-t0.x,dy=p.clientY-t0.y;t0=null;
+    if(Math.abs(dx)>=60&&Math.abs(dx)>Math.abs(dy)*1.8)shiftMonth(dx>0?1:-1)},{passive:true});
+})();
+// שעון האימון
+setInterval(()=>{const a=S.active;if(!a||document.hidden)return;const t=durTxt(Date.now()-a.t0);for(const id of ['timer','ctimer']){const el=document.getElementById(id);if(el)el.textContent=t}},1000);
 document.addEventListener('visibilitychange',()=>{
   if(document.hidden||sheetOpen||document.body.classList.contains('kb'))return;
-  if(followToday&&cur!==today()){const s=sess(cur);if(!s||Date.now()-s.t1>3*36e5){cur=today();userCol={};render(true);return}}
-  if(tab!=='w')render();
+  endStale();
+  const sub=subs[tab];
+  if(sub&&sub.mode==='live'&&!S.active){subs[tab]=null;render(true);return}
+  if(!sub||sub.mode==='view'){if(!sub)calM=calM||today().slice(0,7);render()}
 });
 {const q=new URLSearchParams(location.search).get('tab');if(['w','h','b'].includes(q))tab=q}
 if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
 
+// אימון פעיל → נפתחים ישר בתוכו (חזרה אחורה = לוח השנה)
+if(S.active&&S.active.d===today()&&tab==='w'){subs.w={mode:'live',d:today()};history.pushState({sub:1},'')}
 render(true);
-// חוזרים לאפליקציה באמצע אימון → קופצים לתרגיל הנוכחי
-if(tab==='w'&&totalDone(cur)>0){const nx=firstOpen(cur);if(nx)requestAnimationFrame(()=>{const el=document.getElementById('ex-'+nx.id);el&&el.scrollIntoView({block:'start'})})}
+if(subs.w&&totalDone(today())>0){const nx=firstOpen(today());if(nx)requestAnimationFrame(()=>{const el=document.getElementById('ex-'+nx.id);el&&el.scrollIntoView({block:'start'})})}
+}
 </script>
 </body>
 </html>
