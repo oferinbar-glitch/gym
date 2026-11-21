@@ -416,6 +416,10 @@ main .calnav{margin:0 0 12px}
 .grp{display:inline-flex;align-items:center;white-space:nowrap}
 .sumline{padding:0 16px 14px;font-size:14px}
 .sumline,.xs{align-items:center}
+.cancelbtn{margin-top:10px;height:48px!important;font-size:15px!important}
+.cancelbtn svg{width:16px;height:16px}
+.btn.dangerfill{background:var(--bad);color:#fff}
+.cancelbtn{background:var(--bad-soft)!important;box-shadow:none!important;color:var(--bad)!important}
 </style>
 </head>
 <body>
@@ -430,7 +434,7 @@ main .calnav{margin:0 0 12px}
 <script>
 "use strict";
 {
-const VERSION='1.5';
+const VERSION='1.6';
 
 /* =========================================================
    התוכנית — לשנות כאן תרגילים / סדר / יעדים.
@@ -653,7 +657,7 @@ function renderHome(){
   const td=today(),s=sess(td),act=S.active&&S.active.d===td,data=sessHasData(s);
   let h=S.migNote?migHtml():'';
   h+=`<div class="home"><p class="hdate" id="cdate">${longDate()}</p><p class="hclock" id="clock">${clockTxt()}</p>`;
-  if(act)h+=`<button class="bigstart live" data-act="start">${I.dumbbell}<span>המשך אימון</span><span class="ct" id="ctimer">${durTxt(Date.now()-S.active.t0)}</span></button>${data?'':'<button class="linkbtn" data-act="cancel">ביטול האימון</button>'}`;
+  if(act)h+=`<button class="bigstart live" data-act="start">${I.dumbbell}<span>המשך אימון</span><span class="ct" id="ctimer">${durTxt(Date.now()-S.active.t0)}</span></button>`;
   else if(data&&finished(s)){const st=stats(td);h+=`<button class="bigstart done" data-act="openday" data-val="${td}">${I.check}<span>האימון של היום הושלם</span><span class="ct">${st.sets} סטים${st.dur>=1?` · ${st.dur} דק׳`:''}</span></button>`}
   else if(data)h+=`<button class="bigstart" data-act="start">${I.dumbbell}<span>המשך אימון</span></button>`;
   else h+=`<button class="bigstart" data-act="start">${I.dumbbell}<span>התחל אימון</span></button>`;
@@ -723,7 +727,7 @@ function renderSession(sub){
   else if(prevD)h+=`<div class="prevline">${I.history}<span>אימון קודם: <b>${wday(prevD)} ${dm(prevD)}</b> · ${rel(prevD)}</span></div>`;
   if(prevD&&!S.tipGhost&&done===0)h+=`<div class="notice soft tip">${I.tap}<span>אותו משקל כמו בפעם הקודמת? נגיעה במספר הסט מעתיקה אליו את הערכים הדהויים.</span></div>`;
   h+=list.map((e,k)=>card(e,k,d,now)).join('');
-  if(mode==='live')h+=`<button class="btn pri block finish${done===TOT?' glow':''}${sessHasData(s)?'':' off'}" id="finish" data-act="finish" style="--i:10">${I.flag}<span>סיום אימון</span></button>`;
+  if(mode==='live')h+=`<button class="btn pri block finish${done===TOT?' glow':''}${sessHasData(s)?'':' off'}" id="finish" data-act="finish" style="--i:10">${I.flag}<span>סיום אימון</span></button><button class="btn danger block cancelbtn" data-act="cancel">${I.x}ביטול האימון</button>`;
   else{h+=`<button class="btn pri block" data-act="editdone" style="margin-top:6px">${I.check}סיום עריכה</button>`;
     if(sessHasData(s))h+=`<button class="btn danger block" data-act="delsess" style="margin-top:10px">מחיקת האימון הזה</button>`}
   view.innerHTML=h;
@@ -806,7 +810,6 @@ function card(e,k,d,now){
       <div class="set sh${e.bw?' bw':''}" aria-hidden="true"><span>סט</span>${e.bw?'':`<span>${e.bar!=null?'לצד':'משקל'} <i>ק״ג</i></span><span></span>`}<span>חזרות</span><span></span><span></span></div>
       ${Array.from({length:e.sets},(_,i)=>setBlock(e,i,a[i],p&&p.a[i],d)).join('')}
     </div>
-    ${p?`<p class="prevd">בדהוי: ${wday(p.d)} ${dm(p.d)}</p>`:''}
   </div></div>
 </section>`;
 }
@@ -879,6 +882,14 @@ function celebratePR(el,e){
   toast(`שיא אישי חדש · ${e.n}`);
 }
 
+/* ---------- ביטול אימון ---------- */
+function doCancel(){
+  const d=today(),keep=S.sessions[d]?JSON.stringify(S.sessions[d]):null,act=S.active;
+  delete S.sessions[d];S.active=null;save();
+  const undo=keep?()=>{S.sessions[d]=JSON.parse(keep);S.active=act;save();render();toast('האימון שוחזר')}:null;
+  if(subs.w&&subs.w.mode==='live'&&tab==='w')leaveSub();else render();
+  toast('האימון בוטל',undo);
+}
 /* ---------- סיום אימון ---------- */
 function openFinish(){
   const d=cur,s=sess(d);if(!sessHasData(s))return;
@@ -1112,7 +1123,11 @@ document.addEventListener('click',ev=>{
     case'month':shiftMonth(+v);break;
     case'mnow':calM=today().slice(0,7);calSel=latestIn(calM);render(true);break;
     case'start':startLive();break;
-    case'cancel':{const s=sess(today());if(s&&!sessHasData(s))delete S.sessions[today()];S.active=null;save();render();toast('האימון בוטל');break}
+    case'cancel':{const d=today();
+      if(sessHasData(sess(d))){openSheet({title:'לבטל את האימון?',body:`<p class="muted" style="font-size:15px;margin-top:10px">כל מה שרשמת באימון הזה (<b>${totalDone(d)}</b> סטים) יימחק.</p>`,
+        foot:'<div class="foot2"><button class="btn line" data-act="close">המשך באימון</button><button class="btn dangerfill" data-act="docancel">ביטול האימון</button></div>'});break}
+      doCancel();break}
+    case'docancel':closeSheet();setTimeout(doCancel,60);break;
     case'openday':openSub('w',{mode:'view',d:v});break;
     case'selday':calSel=v;render();break;
     case'share-w':openShare(v);break;
