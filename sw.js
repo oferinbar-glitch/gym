@@ -1,5 +1,5 @@
 // גרסה חדשה תמיד כשיש רשת; עותק שמור כשאין.
-const CACHE="gym-v9";
+const CACHE="gym-v10";
 const CORE=["./","index.html","manifest.webmanifest","confetti.js","lottie.js","dude.json","fonts/ibm-plex-sans-hebrew-hebrew-400-normal.woff2","fonts/ibm-plex-sans-hebrew-hebrew-500-normal.woff2","fonts/ibm-plex-sans-hebrew-hebrew-600-normal.woff2","fonts/ibm-plex-sans-hebrew-latin-400-normal.woff2","fonts/ibm-plex-sans-hebrew-latin-500-normal.woff2","fonts/ibm-plex-sans-hebrew-latin-600-normal.woff2","fonts/barlow-condensed-latin-500-normal.woff2","fonts/barlow-condensed-latin-600-normal.woff2","fonts/barlow-condensed-latin-700-normal.woff2","icon-192.png","icon-512.png","icon-maskable-512.png","apple-touch-icon.png"];
 self.addEventListener("install",e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>Promise.all(CORE.map(u=>c.add(u).catch(()=>{})))))});
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

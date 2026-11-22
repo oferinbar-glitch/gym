@@ -416,7 +416,7 @@ body.resting .toast{bottom:calc(160px + env(safe-area-inset-bottom))}
 <script>
 "use strict";
 {
-const VERSION='2.1';
+const VERSION='2.2';
 
 /* =========================================================
    התוכנית — לשנות כאן תרגילים / סדר / יעדים.
@@ -880,19 +880,17 @@ function celebratePR(el,e){
 
 /* ---------- טיימר מנוחה ---------- */
 // נשמר כזמן סיום, כך שהוא נכון גם אחרי יציאה וחזרה לאפליקציה
-const restEl=document.getElementById('rest');let restTick=null,actx=null;
+const restEl=document.getElementById('rest');let restTick=null;
 function startRest(id,i){
   const e=EX[id];if(mode!=='live'||!e.rest)return;
   if(totalDone(cur)>=totalOf(cur))return;            // סוף האימון — אין מנוחה
   const key=id+'|'+i,R=S.rest;
   if(R&&R.key===key&&Date.now()-R.t0<15000)return;   // אותו סט שוב (תיקון הקלדה)
   S.rest={key,ex:id,t0:Date.now(),end:Date.now()+e.rest*1000,total:e.rest*1000};save();
-  try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();actx.resume&&actx.resume()}catch(err){}
   showRest();
 }
 function stopRest(){S.rest=null;save();clearInterval(restTick);restTick=null;restEl.className='rest';document.body.classList.remove('resting')}
 function adjRest(sec){const R=S.rest;if(!R)return;R.end+=sec*1000;R.total=Math.max(1000,R.total+sec*1000);if(R.end<=Date.now()+1000)R.end=Date.now()+1000;save();drawRest();haptic()}
-function beep(){try{if(!actx)return;const t=actx.currentTime;[0,.28].forEach(o=>{const g=actx.createGain(),v=actx.createOscillator();v.type='sine';v.frequency.value=880;g.gain.setValueAtTime(.0001,t+o);g.gain.exponentialRampToValueAtTime(.35,t+o+.02);g.gain.exponentialRampToValueAtTime(.0001,t+o+.22);v.connect(g).connect(actx.destination);v.start(t+o);v.stop(t+o+.25)})}catch(e){}}
 function showRest(){
   const R=S.rest;if(!R)return;
   restEl.innerHTML=`<button class="rb" data-act="rest-adj" data-val="-5" aria-label="פחות 5 שניות"><span class="n">−5</span></button>
@@ -908,7 +906,7 @@ function drawRest(){
   if(left<=0){
     clearInterval(restTick);restTick=null;
     t.textContent='0:00';p.style.width='0%';
-    if(!restEl.classList.contains('over')){restEl.classList.add('over');document.getElementById('restL').textContent='המנוחה נגמרה';haptic([220,120,220]);beep()}
+    if(!restEl.classList.contains('over')){restEl.classList.add('over');document.getElementById('restL').textContent='המנוחה נגמרה';haptic([220,120,220])}
     setTimeout(()=>{if(S.rest&&S.rest.end<=Date.now())stopRest()},4000);
     return;
   }
