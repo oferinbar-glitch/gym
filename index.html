@@ -400,6 +400,39 @@ body.resting main{padding-bottom:calc(190px + env(safe-area-inset-bottom))}
 body.resting .toast{bottom:calc(160px + env(safe-area-inset-bottom))}
 .rest .rb .n{direction:ltr;unicode-bidi:isolate}
 .rest.over .rmid b{color:#fff}
+
+/* ---------- warm-up ---------- */
+.wu{margin:8px 12px 2px;padding:10px 12px;border-radius:14px;background:#FFF6F0}
+.wuh{display:flex;align-items:center;gap:6px;width:100%;font-size:13px;font-weight:600;color:var(--brand-ink);pointer-events:none}
+.wu.compact .wuh{pointer-events:auto}
+.wuh svg{width:15px;height:15px}
+.wus{flex:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;font-weight:400;color:var(--ink-2);margin-right:6px;font-size:13px}
+.wu.compact{padding:8px 12px}
+.wu .chev{transform:none!important}
+.wup{display:flex;align-items:center;gap:8px;margin-top:8px}
+.wup label{flex:1;font-size:13.5px;color:var(--ink-2)}
+.wup .pin,.wup .pbox{width:104px;flex:none}
+.wup .in{height:46px;font-size:22px;background:#fff}
+.wup .in:focus{box-shadow:inset 0 0 0 2px var(--brand)}
+.wup .in.has{background:#fff;box-shadow:inset 0 0 0 1.5px var(--brand-soft)}
+.ck.sm{width:36px;height:36px}
+.ck.sm svg{width:16px;height:16px}
+.ck.on,.wrow.done .ck{background:var(--brand);box-shadow:none;color:#fff}
+.ck.on svg,.wrow.done .ck svg{opacity:1}
+.wrow.done .ck{background:var(--ok)}
+.wur{margin-top:4px}
+.wrow{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid rgba(201,63,5,.1)}
+.wrow:first-child{border-top:0}
+.wk{width:24px;font-family:var(--fn);font-weight:600;font-size:15px;color:var(--brand-ink);text-align:center}
+.wv{flex:1;display:flex;align-items:baseline;gap:8px;font-size:17px}
+.wv small{font-size:12px;color:var(--ink-2)}
+.wp{font-family:var(--fn);font-weight:500;font-size:14px;color:var(--ink-3)}
+.wrow.done .wv{color:var(--ink-3)}
+.wrow.done .wv .st{color:var(--ink-3)}
+.wuhint{margin:8px 0 2px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.vwu .vb{color:var(--brand-ink)}
+.vwu .vb svg{width:15px;height:15px}
+.vwu .vv{font-size:15px;color:var(--ink-2)}
 </style>
 </head>
 <body>
@@ -416,24 +449,25 @@ body.resting .toast{bottom:calc(160px + env(safe-area-inset-bottom))}
 <script>
 "use strict";
 {
-const VERSION='2.2';
+const VERSION='2.3';
 
 /* =========================================================
    התוכנית — לשנות כאן תרגילים / סדר / יעדים.
    id קבוע: אסור לשנות id של תרגיל קיים, אחרת ההיסטוריה שלו תתנתק.
    rest בשניות. reps:null = מקסימום. bw:true = בלי משקל.
    bar = משקל המוט; ברשומה מזינים משקל לצד אחד, והסה״כ = מוט + 2 × צד.
+   wu = סטי חימום: 2 = ‏6 חז׳ ב-50% ואז 3 חז׳ ב-80%; 1 = ‏6 חז׳ ב-50%. לא נספרים בנפח ובסטים.
    ========================================================= */
 const PROGRAM=[
-  {id:'bench',    n:'לחיצת חזה חופשי',                      sets:3, reps:8,  rest:90},
-  {id:'pulldown', n:'פולי עליון',       sub:'אחיזה ניטרלית', sets:3, reps:6,  rest:120},
-  {id:'legext',   n:'פשיטת רגליים',                         sets:3, reps:10, rest:75},
-  {id:'legcurl',  n:'כפיפת רגליים',                         sets:3, reps:10, rest:75},
-  {id:'latraise', n:'הרחקת כתפיים',                         sets:3, reps:15, rest:50},
-  {id:'curl',     n:'דו־ראשי',          sub:'מוט אולימפי',   sets:3, reps:8,  rest:90, bar:20},
-  {id:'skull',    n:'לחיצה צרפתית',                         sets:3, reps:8,  rest:90, bar:7.5},
-  {id:'calf',     n:'תאומים בישיבה',                        sets:3, reps:12, rest:75},
-  {id:'absm',     n:'בטן במכונה',                           sets:3, reps:20, rest:null},
+  {id:'bench',    n:'לחיצת חזה חופשי',                      sets:3, reps:8,  rest:90, wu:2},
+  {id:'pulldown', n:'פולי עליון',       sub:'אחיזה ניטרלית', sets:3, reps:6,  rest:120, wu:2},
+  {id:'legext',   n:'פשיטת רגליים',                         sets:3, reps:10, rest:75, wu:2},
+  {id:'legcurl',  n:'כפיפת רגליים',                         sets:3, reps:10, rest:75, wu:2},
+  {id:'latraise', n:'הרחקת כתפיים',                         sets:3, reps:15, rest:50, wu:1},
+  {id:'curl',     n:'דו־ראשי',          sub:'מוט אולימפי',   sets:3, reps:8,  rest:90, bar:20, wu:1},
+  {id:'skull',    n:'לחיצה צרפתית',                         sets:3, reps:8,  rest:90, bar:7.5, wu:1},
+  {id:'calf',     n:'תאומים בישיבה',                        sets:3, reps:12, rest:75, wu:1},
+  {id:'absm',     n:'בטן במכונה',                           sets:3, reps:20, rest:null, wu:1},
 ];
 // תרגילים שיצאו מהתוכנית — נשארים בהיסטוריה
 const RETIRED=[
@@ -584,6 +618,7 @@ const I={
   edit:sv('<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>'),
   spark:sv('<path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/>'),
   wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2a9.7 9.7 0 00-8.4 14.6L2.3 21.7l5-1.3A9.7 9.7 0 1012 2.2zm0 17.7a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 19.9zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 01-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.7.3 2.8 2.8 0 00-.9 2.1 5 5 0 001 2.6 11.3 11.3 0 004.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 001.7-1.2 2.1 2.1 0 00.1-1.2c0-.1-.2-.2-.5-.3z"/></svg>',
+  flame:sv('<path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 01-10 0c0-2.5 1.2-3.8 2.3-5 .3 1.6 1 2.6 2.2 3C11 8.5 11 5.6 12 3z"/>'),
   info:sv('<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>'),
   tap:sv('<path d="M9 11V5.5a1.5 1.5 0 013 0V11m0-1.5a1.5 1.5 0 013 0V11m0-.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-.5a6 6 0 01-4.6-2.2L4.7 15.3a1.6 1.6 0 012.4-2.1L9 15"/>'),
 };
@@ -736,6 +771,8 @@ function viewCard(e,k,d){
     const c=a[i];if(i>=e.sets&&!anyV(c))continue;
     rows.push(`<div class="vrow"><span class="vb">${i+1}</span><span class="vv">${anyV(c)?setStr(c,e)+(e.bw?'<small>חזרות</small>':e.bar!=null&&has(c.w)?`<small>${fmt(c.w)} לצד</small>`:''):'<span class="muted">לא בוצע</span>'}</span>${deltaText(c,p&&p.a[i],e)}</div>`);
   }
+  const wv=wuOf(d,e.id),ws=wv?wuSets(e,wv.p).filter((_,k)=>wv.d&&wv.d[k]):[];
+  if(ws.length)rows.unshift(`<div class="vrow vwu"><span class="vb">${I.flame}</span><span class="vv">${ws.map(x=>wuRowTxt(x).replace(/<small>.*?<\/small>/,'')).join('<span class="sep"></span>')}</span><span class="dl eq">חימום</span></div>`);
   return`<section class="vex"><div class="vh"><span class="exn">${k+1}</span><b>${esc(e.n)}${e.sub?`<small>${esc(e.sub)}</small>`:''}</b>${isPR(e.id,d)?`<span class="tag pr">${I.trophy}שיא</span>`:''}</div>${rows.join('')}</section>`;
 }
 function statusHtml(e,d,now){
@@ -780,11 +817,12 @@ function rInput(e,i,j,c,pv){
   return`<input class="in${v!==''?' has':''}" ${at(e,i,j)} data-f="r" inputmode="numeric" enterkeyhint="next" placeholder="${ph}" value="${v}" aria-label="חזרות">`;
 }
 const dropCount=(d,e,i,c,pv)=>Math.max(c&&c.d?c.d.length:0,hideGhost.has(d+'|'+e.id+'|'+i)?0:(pv&&pv.d?pv.d.filter(filledD).length:0));
+function ghostOf(e,i,pv,d){const pl=planOf(d,e.id);return has(pl)?Object.assign({},pv||{},{w:pl}):pv}
 function setBlock(e,i,c,pv,d){
   const done=isDone(c,e);
   let h=`<div class="set${e.bw?' bw':''}${done?' done':''}" data-i="${i}">
     <span class="si">${i+1}${deltaHtml(c,pv,e)}</span>
-    ${e.bw?'':wInput(e,i,null,c,pv)}${rInput(e,i,null,c,pv)}
+    ${e.bw?'':wInput(e,i,null,c,ghostOf(e,i,pv,d))}${rInput(e,i,null,c,pv)}
     ${e.bw?'<span></span>':`<button class="ab" data-act="adddrop" data-ex="${e.id}" data-i="${i}" aria-label="עוד משקל באותו סט">${I.plus}</button>`}
     <button class="ck" data-act="check" data-ex="${e.id}" data-i="${i}" aria-label="סט ${i+1} בוצע">${I.check}</button>
   </div>`;
@@ -806,6 +844,7 @@ function card(e,k,d,now){
   <div class="exb"${col?' inert':''}><div class="clip">
     ${p?`<p class="last"><span>פעם קודמת</span>${sumLine(p.a,e)}</p>`:''}
     ${readyUp(e.id,d)?`<p class="hint">${I.up}עמדת בכל החזרות בפעם הקודמת. אפשר לעלות במשקל.</p>`:''}
+    ${wuHtml(e,d)}
     <div class="sets">
       <div class="set hd${e.bw?' bw':''}" aria-hidden="true"><span>סט</span>${e.bw?'':`<span>${e.bar!=null?'ק״ג לצד':'ק״ג'}</span>`}<span>חזרות</span><span></span><span></span></div>
       ${Array.from({length:e.sets},(_,i)=>setBlock(e,i,a[i],p&&p.a[i],d)).join('')}
@@ -839,6 +878,7 @@ function refresh(id,wasComp){
   const now=firstOpen(d);
   document.querySelectorAll('.ex[data-ex]').forEach(x=>{const ee=EX[x.dataset.ex];x.classList.toggle('now',ee===now&&mode==='live');x.querySelector('.exst').innerHTML=statusHtml(ee,d,now)});
   el.querySelector('.sumline').innerHTML=sumLine(arrOf(d,id),e);
+  const wuEl=el.querySelector('.wu');if(wuEl&&n>0&&!wuEl.classList.contains('compact')&&!wuOpen.has(id))refreshWu(id);
   const k=d+'|'+id;
   if(isPR(id,d)){if(!prFired.has(k)){prFired.add(k);celebratePR(el,e)}}else prFired.delete(k);
   const t=totalDone(d),cnt=document.getElementById('cnt');
@@ -878,6 +918,61 @@ function celebratePR(el,e){
   toast(`שיא אישי חדש: ${e.n}`);
 }
 
+/* ---------- חימום ---------- */
+// נשמר בנפרד מהסטים (s.wu), כך שאינו נספר בנפח, בסטים או בשיאים
+const WU={1:[[.5,6]],2:[[.5,6],[.8,3]]};
+const wuOf=(d,id)=>(S.sessions[d]&&S.sessions[d].wu&&S.sessions[d].wu[id])||null;
+const planOf=(d,id)=>{const w=wuOf(d,id);return w&&has(w.p)?w.p:null};
+function wuSet(d,id,fn){const s=S.sessions[d]||newSess(d);s.wu=s.wu||{};const w=s.wu[id]||(s.wu[id]={p:null,d:[]});fn(w);save()}
+// עיגול לקפיצות משקל אמיתיות במכון
+const roundW=x=>x<20?Math.round(x):Math.round(x/2.5)*2.5;
+function wuSets(e,plan){
+  if(!has(plan)||!e.wu)return[];
+  const total=tw(e,plan);
+  return WU[e.wu].map(([pct,reps])=>{
+    if(e.bar==null)return{reps,pct,w:Math.max(roundW(total*pct),0)};
+    const side=Math.round((total*pct-e.bar)/2/1.25)*1.25;   // צלחות של 1.25
+    return side<1.25?{reps,pct,bar:true,tot:e.bar}:{reps,pct,side,tot:e.bar+2*side};
+  });
+}
+function wuRowTxt(x){
+  if(x.bar)return`<span class="st"><b>${fmt(x.tot)}</b><i class="u">ק״ג</i><i class="x">×</i><b>${x.reps}</b></span><small>מוט ריק</small>`;
+  if(has(x.side))return`<span class="st"><b>${fmt(x.tot)}</b><i class="u">ק״ג</i><i class="x">×</i><b>${x.reps}</b></span><small>${fmt(x.side)} לצד</small>`;
+  return`<span class="st"><b>${fmt(x.w)}</b><i class="u">ק״ג</i><i class="x">×</i><b>${x.reps}</b></span>`;
+}
+function wuHtml(e,d){
+  if(!e.wu||mode!=='live')return'';
+  const w=wuOf(d,e.id),plan=w&&has(w.p)?w.p:null,sets=wuSets(e,plan),done=w&&w.d||[];
+  const p=prevSess(e.id,d),last=p&&best(p.a,e),ph=last?fmt(last.w):'';
+  const allDone=sets.length&&sets.every((_,k)=>done[k]),started=doneCount(d,e)>0;
+  const compact=(allDone||started)&&!wuOpen.has(e.id);
+  const v=has(plan)?fmt(plan):'';
+  let h=`<div class="wu${compact?' compact':''}" data-ex="${e.id}">
+    <button class="wuh" data-act="wu-toggle" data-val="${e.id}" ${compact?'':'tabindex="-1"'}>${I.flame}<span>חימום</span>${compact?`<span class="wus">${allDone?sets.map(wuRowTxt).map(x=>x.replace(/<small>.*?<\/small>/,'')).join('<span class="sep"></span>'):'לא בוצע'}</span><span class="chev">${I.down}</span>`:''}</button>`;
+  if(!compact){
+    h+=`<div class="wup"><label for="pl-${e.id}">משקל עבודה מתוכנן${e.bar!=null?' (לצד)':''}</label>
+      ${e.bar!=null?`<span class="wbox pbox">`:''}<input class="in pin${v?' has':''}" id="pl-${e.id}" data-ex="${e.id}" data-f="plan" inputmode="decimal" enterkeyhint="next" autocomplete="off" placeholder="${ph}" value="${v}">${e.bar!=null?`<span class="tot${v?'':' g'}">${totTxt(e,plan,last&&last.w)}</span></span>`:''}
+      <button class="ck sm${has(plan)?' on':''}" data-act="plan-ok" data-ex="${e.id}" aria-label="אישור משקל עבודה">${I.check}</button></div>`;
+    h+=`<div class="wur">${sets.length?sets.map((x,k)=>`<div class="wrow${done[k]?' done':''}"><span class="wk">ח${k+1}</span><span class="wv">${wuRowTxt(x)}</span><span class="wp">${Math.round(x.pct*100)}%</span><button class="ck sm" data-act="wu-done" data-ex="${e.id}" data-i="${k}" aria-label="חימום ${k+1} בוצע">${I.check}</button></div>`).join('')
+      :`<p class="wuhint">${ph?`בפעם הקודמת עבדת עם ${e.bar!=null?`${ph} לצד`:`${ph} ק״ג`}. לחיצה על העיגול מאשרת, או שתזין משקל אחר.`:'הזן את משקל העבודה ואחשב את סטי החימום.'}</p>`}</div>`;
+  }
+  return h+'</div>';
+}
+const wuOpen=new Set();
+function refreshWu(id){const e=EX[id],el=document.querySelector(`#ex-${id} .wu`);if(!el)return;
+  const f=document.activeElement&&document.activeElement.id==='pl-'+id;
+  el.outerHTML=wuHtml(e,cur);
+  if(f){const n=document.getElementById('pl-'+id);if(n){n.focus();const L=n.value.length;try{n.setSelectionRange(L,L)}catch(err){}}}
+}
+// משקל העבודה המתוכנן הופך לערך הדהוי של המשקל בסטי העבודה
+function applyPlan(id){
+  const e=EX[id],plan=planOf(cur,id);
+  document.querySelectorAll(`#ex-${id} .set[data-i]:not(.drop):not(.hd)`).forEach(row=>{
+    const i=+row.dataset.i,pv=prevSet(id,cur,i),wi=row.querySelector('[data-f="w"]');if(!wi)return;
+    const ph=has(plan)?plan:pv&&pv.w;wi.placeholder=has(ph)?fmt(ph):'';
+    const tt=row.querySelector('.tot');if(tt&&!wi.value)tt.textContent=totTxt(e,null,ph);
+  });
+}
 /* ---------- טיימר מנוחה ---------- */
 // נשמר כזמן סיום, כך שהוא נכון גם אחרי יציאה וחזרה לאפליקציה
 const restEl=document.getElementById('rest');let restTick=null;
@@ -1168,9 +1263,9 @@ document.addEventListener('click',ev=>{
     case'toggle':{const el=document.getElementById('ex-'+v),on=!el.classList.contains('col');userCol[v]=on;setCol(el,on);break}
     case'jump':{const el=document.getElementById('ex-'+v);if(!el)break;if(el.classList.contains('col')){userCol[v]=false;setCol(el,false)}el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});break}
     case'check':{
-      const id=b.dataset.ex,i=+b.dataset.i,e=EX[id],c=arrOf(cur,id)[i],pv=prevSet(id,cur,i);
+      const id=b.dataset.ex,i=+b.dataset.i,e=EX[id],c=arrOf(cur,id)[i],pv=ghostOf(e,i,prevSet(id,cur,i),cur);
       if(isDone(c,e))break;
-      if(anyV(pv)){
+      if(anyV(pv)&&(e.bw||has(pv.w)||(c&&has(c.w)))&&(has(pv.r)||(c&&has(c.r)))){
         const el=document.getElementById('ex-'+id),wasComp=el.classList.contains('comp');
         if(!el.classList.contains('col'))userCol[id]=false;
         if(!e.bw&&has(pv.w)&&!(c&&has(c.w)))setVal(cur,id,i,'w',pv.w);
@@ -1198,6 +1293,13 @@ document.addEventListener('click',ev=>{
       hideGhost.add(cur+'|'+id+'|'+i);save();userCol[id]=false;rerenderCard(id);refresh(id);break}
     case'finish':openFinish();break;
     case'rest-adj':adjRest(+v);break;
+    case'plan-ok':{const id=b.dataset.ex,e=EX[id];
+      if(!has(planOf(cur,id))){const p=prevSess(id,cur),l=p&&best(p.a,e);if(!l){document.getElementById('pl-'+id).focus();break}wuSet(cur,id,w=>{w.p=l.w;w.d=[]})}
+      haptic();refreshWu(id);applyPlan(id);break}
+    case'wu-done':{const id=b.dataset.ex,k=+b.dataset.i;wuSet(cur,id,w=>{w.d[k]=!w.d[k]});haptic();
+      const w=wuOf(cur,id),n=wuSets(EX[id],w.p).length;if(n&&w.d.filter(Boolean).length>=n){wuOpen.delete(id);setTimeout(()=>refreshWu(id),350)}
+      b.closest('.wrow').classList.toggle('done',!!w.d[k]);break}
+    case'wu-toggle':{const id=v,el=document.querySelector(`#ex-${id} .wu`);if(!el||!el.classList.contains('compact'))break;wuOpen.add(id);refreshWu(id);break}
     case'rest-stop':stopRest();break;
     case'delsess':{const d=cur,keep=JSON.stringify(S.sessions[d]);delete S.sessions[d];if(S.active&&S.active.d===d)S.active=null;save();leaveSub();
       toast('האימון נמחק',()=>{S.sessions[d]=JSON.parse(keep);save();render();toast('שוחזר')});break}
@@ -1213,6 +1315,16 @@ document.addEventListener('click',ev=>{
 });
 view.addEventListener('input',ev=>{
   const t=ev.target;if(!t.matches('.in'))return;
+  if(t.dataset.f==='plan'){
+    const id=t.dataset.ex,e=EX[id],c=t.value.replace(/,/g,'.').replace(/[^\d.]/g,'').replace(/(\..*)\./g,'$1').slice(0,6);if(c!==t.value)t.value=c;
+    const n=c===''||c==='.'?null:parseFloat(c),val=Number.isFinite(n)?n:null;
+    wuSet(cur,id,w=>{w.p=val;w.d=[]});
+    t.classList.toggle('has',t.value!=='');
+    const tt=t.parentElement.querySelector('.tot');if(tt){const p=prevSess(id,cur),l=p&&best(p.a,e);tt.textContent=totTxt(e,val,l&&l.w);tt.classList.toggle('g',val==null)}
+    const wr=document.querySelector(`#ex-${id} .wur`);if(wr){const tmp=document.createElement('div');tmp.innerHTML=wuHtml(e,cur);const nw=tmp.querySelector('.wur');if(nw)wr.replaceWith(nw)}
+    const ok=document.querySelector(`#ex-${id} [data-act="plan-ok"]`);if(ok)ok.classList.toggle('on',val!=null);
+    applyPlan(id);return;
+  }
   const f=t.dataset.f,raw=t.value,id=t.dataset.ex,i=+t.dataset.i,j=t.dataset.j!=null?+t.dataset.j:null;
   const c=f==='w'?raw.replace(/,/g,'.').replace(/[^\d.]/g,'').replace(/(\..*)\./g,'$1').slice(0,6):raw.replace(/\D/g,'').slice(0,3);
   if(c!==raw)t.value=c;
@@ -1220,7 +1332,7 @@ view.addEventListener('input',ev=>{
   setVal(cur,id,i,f,val,j);
   t.classList.toggle('has',t.value!=='');
   const box=t.parentElement;
-  if(box.classList.contains('wbox')){const e=EX[id],pv=prevSet(id,cur,i),pw=j==null?(pv&&pv.w):(pv&&pv.d&&pv.d[j]&&pv.d[j].w);const sp=box.querySelector('.tot');sp.textContent=totTxt(e,val,pw);sp.classList.toggle('g',val==null)}
+  if(box.classList.contains('wbox')){const e=EX[id],pv=prevSet(id,cur,i),pl=planOf(cur,id),pw=j==null?(has(pl)?pl:pv&&pv.w):(pv&&pv.d&&pv.d[j]&&pv.d[j].w);const sp=box.querySelector('.tot');sp.textContent=totTxt(e,val,pw);sp.classList.toggle('g',val==null)}
   rowUpdate(id,i);refresh(id);
 });
 view.addEventListener('keydown',ev=>{
