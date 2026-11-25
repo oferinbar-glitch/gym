@@ -449,7 +449,7 @@ body.resting .toast{bottom:calc(160px + env(safe-area-inset-bottom))}
 <script>
 "use strict";
 {
-const VERSION='2.3';
+const VERSION='2.4';
 
 /* =========================================================
    התוכנית — לשנות כאן תרגילים / סדר / יעדים.
@@ -924,15 +924,15 @@ const WU={1:[[.5,6]],2:[[.5,6],[.8,3]]};
 const wuOf=(d,id)=>(S.sessions[d]&&S.sessions[d].wu&&S.sessions[d].wu[id])||null;
 const planOf=(d,id)=>{const w=wuOf(d,id);return w&&has(w.p)?w.p:null};
 function wuSet(d,id,fn){const s=S.sessions[d]||newSess(d);s.wu=s.wu||{};const w=s.wu[id]||(s.wu[id]={p:null,d:[]});fn(w);save()}
-// עיגול לקפיצות משקל אמיתיות במכון
-const roundW=x=>x<20?Math.round(x):Math.round(x/2.5)*2.5;
+// עיגול ל-0.5 הקרוב
+const roundW=x=>Math.round(x*2)/2;
 function wuSets(e,plan){
   if(!has(plan)||!e.wu)return[];
   const total=tw(e,plan);
   return WU[e.wu].map(([pct,reps])=>{
     if(e.bar==null)return{reps,pct,w:Math.max(roundW(total*pct),0)};
-    const side=Math.round((total*pct-e.bar)/2/1.25)*1.25;   // צלחות של 1.25
-    return side<1.25?{reps,pct,bar:true,tot:e.bar}:{reps,pct,side,tot:e.bar+2*side};
+    const side=roundW((total*pct-e.bar)/2);
+    return side<=0?{reps,pct,bar:true,tot:e.bar}:{reps,pct,side,tot:e.bar+2*side};
   });
 }
 function wuRowTxt(x){
